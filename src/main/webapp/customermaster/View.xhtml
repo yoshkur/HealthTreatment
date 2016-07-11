@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewCustomermasterTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewCustomermasterLabel_id}"/>
+                    <h:outputText value="#{customermasterController.selected.id}" title="#{bundle.ViewCustomermasterTitle_id}"/>
+                    <h:outputText value="#{bundle.ViewCustomermasterLabel_recorddate}"/>
+                    <h:outputText value="#{customermasterController.selected.recorddate}" title="#{bundle.ViewCustomermasterTitle_recorddate}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewCustomermasterLabel_recordprogram}"/>
+                    <h:outputText value="#{customermasterController.selected.recordprogram}" title="#{bundle.ViewCustomermasterTitle_recordprogram}"/>
+                    <h:outputText value="#{bundle.ViewCustomermasterLabel_recorduserid}"/>
+                    <h:outputText value="#{customermasterController.selected.recorduserid}" title="#{bundle.ViewCustomermasterTitle_recorduserid}"/>
+                    <h:outputText value="#{bundle.ViewCustomermasterLabel_recordvalid}"/>
+                    <h:outputText value="#{customermasterController.selected.recordvalid}" title="#{bundle.ViewCustomermasterTitle_recordvalid}"/>
+                    <h:outputText value="#{bundle.ViewCustomermasterLabel_fullname}"/>
+                    <h:outputText value="#{customermasterController.selected.fullname}" title="#{bundle.ViewCustomermasterTitle_fullname}"/>
+                    <h:outputText value="#{bundle.ViewCustomermasterLabel_ruby}"/>
+                    <h:outputText value="#{customermasterController.selected.ruby}" title="#{bundle.ViewCustomermasterTitle_ruby}"/>
+                    <h:outputText value="#{bundle.ViewCustomermasterLabel_sex}"/>
+                    <h:outputText value="#{customermasterController.selected.sex}" title="#{bundle.ViewCustomermasterTitle_sex}"/>
+                    <h:outputText value="#{bundle.ViewCustomermasterLabel_zip}"/>
+                    <h:outputText value="#{customermasterController.selected.zip}" title="#{bundle.ViewCustomermasterTitle_zip}"/>
+                    <h:outputText value="#{bundle.ViewCustomermasterLabel_address}"/>
+                    <h:outputText value="#{customermasterController.selected.address}" title="#{bundle.ViewCustomermasterTitle_address}"/>
+                    <h:outputText value="#{bundle.ViewCustomermasterLabel_phonenumber1}"/>
+                    <h:outputText value="#{customermasterController.selected.phonenumber1}" title="#{bundle.ViewCustomermasterTitle_phonenumber1}"/>
+                    <h:outputText value="#{bundle.ViewCustomermasterLabel_phonenumber2}"/>
+                    <h:outputText value="#{customermasterController.selected.phonenumber2}" title="#{bundle.ViewCustomermasterTitle_phonenumber2}"/>
+                    <h:outputText value="#{bundle.ViewCustomermasterLabel_birthday}"/>
+                    <h:outputText value="#{customermasterController.selected.birthday}" title="#{bundle.ViewCustomermasterTitle_birthday}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewCustomermasterLabel_customerinformationid}"/>
+                    <h:outputText value="#{customermasterController.selected.customerinformationid}" title="#{bundle.ViewCustomermasterTitle_customerinformationid}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{customermasterController.destroyAndView}" value="#{bundle.ViewCustomermasterDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewCustomermasterEditLink}"/>
+                <br />
+                <h:commandLink action="#{customermasterController.prepareCreate}" value="#{bundle.ViewCustomermasterCreateLink}" />
+                <br />
+                <h:commandLink action="#{customermasterController.prepareList}" value="#{bundle.ViewCustomermasterShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewCustomermasterIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewCustomerinformationTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewCustomerinformationLabel_id}"/>
+                    <h:outputText value="#{customerinformationController.selected.id}" title="#{bundle.ViewCustomerinformationTitle_id}"/>
+                    <h:outputText value="#{bundle.ViewCustomerinformationLabel_recorddate}"/>
+                    <h:outputText value="#{customerinformationController.selected.recorddate}" title="#{bundle.ViewCustomerinformationTitle_recorddate}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewCustomerinformationLabel_recordprogram}"/>
+                    <h:outputText value="#{customerinformationController.selected.recordprogram}" title="#{bundle.ViewCustomerinformationTitle_recordprogram}"/>
+                    <h:outputText value="#{bundle.ViewCustomerinformationLabel_recorduserid}"/>
+                    <h:outputText value="#{customerinformationController.selected.recorduserid}" title="#{bundle.ViewCustomerinformationTitle_recorduserid}"/>
+                    <h:outputText value="#{bundle.ViewCustomerinformationLabel_recordvalid}"/>
+                    <h:outputText value="#{customerinformationController.selected.recordvalid}" title="#{bundle.ViewCustomerinformationTitle_recordvalid}"/>
+                    <h:outputText value="#{bundle.ViewCustomerinformationLabel_customerid}"/>
+                    <h:outputText value="#{customerinformationController.selected.customerid}" title="#{bundle.ViewCustomerinformationTitle_customerid}"/>
+                    <h:outputText value="#{bundle.ViewCustomerinformationLabel_firstvisitdate}"/>
+                    <h:outputText value="#{customerinformationController.selected.firstvisitdate}" title="#{bundle.ViewCustomerinformationTitle_firstvisitdate}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewCustomerinformationLabel_introducer}"/>
+                    <h:outputText value="#{customerinformationController.selected.introducer}" title="#{bundle.ViewCustomerinformationTitle_introducer}"/>
+                    <h:outputText value="#{bundle.ViewCustomerinformationLabel_relationship}"/>
+                    <h:outputText value="#{customerinformationController.selected.relationship}" title="#{bundle.ViewCustomerinformationTitle_relationship}"/>
+                    <h:outputText value="#{bundle.ViewCustomerinformationLabel_anamnesis}"/>
+                    <h:outputText value="#{customerinformationController.selected.anamnesis}" title="#{bundle.ViewCustomerinformationTitle_anamnesis}"/>
+                    <h:outputText value="#{bundle.ViewCustomerinformationLabel_familymember}"/>
+                    <h:outputText value="#{customerinformationController.selected.familymember}" title="#{bundle.ViewCustomerinformationTitle_familymember}"/>
+                    <h:outputText value="#{bundle.ViewCustomerinformationLabel_familymedicalhistory}"/>
+                    <h:outputText value="#{customerinformationController.selected.familymedicalhistory}" title="#{bundle.ViewCustomerinformationTitle_familymedicalhistory}"/>
+                    <h:outputText value="#{bundle.ViewCustomerinformationLabel_job}"/>
+                    <h:outputText value="#{customerinformationController.selected.job}" title="#{bundle.ViewCustomerinformationTitle_job}"/>
+                    <h:outputText value="#{bundle.ViewCustomerinformationLabel_eating}"/>
+                    <h:outputText value="#{customerinformationController.selected.eating}" title="#{bundle.ViewCustomerinformationTitle_eating}"/>
+                    <h:outputText value="#{bundle.ViewCustomerinformationLabel_sleeping}"/>
+                    <h:outputText value="#{customerinformationController.selected.sleeping}" title="#{bundle.ViewCustomerinformationTitle_sleeping}"/>
+                    <h:outputText value="#{bundle.ViewCustomerinformationLabel_exercise}"/>
+                    <h:outputText value="#{customerinformationController.selected.exercise}" title="#{bundle.ViewCustomerinformationTitle_exercise}"/>
+                    <h:outputText value="#{bundle.ViewCustomerinformationLabel_smokingdrinking}"/>
+                    <h:outputText value="#{customerinformationController.selected.smokingdrinking}" title="#{bundle.ViewCustomerinformationTitle_smokingdrinking}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{customerinformationController.destroyAndView}" value="#{bundle.ViewCustomerinformationDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewCustomerinformationEditLink}"/>
+                <br />
+                <h:commandLink action="#{customerinformationController.prepareCreate}" value="#{bundle.ViewCustomerinformationCreateLink}" />
+                <br />
+                <h:commandLink action="#{customerinformationController.prepareList}" value="#{bundle.ViewCustomerinformationShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewCustomerinformationIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

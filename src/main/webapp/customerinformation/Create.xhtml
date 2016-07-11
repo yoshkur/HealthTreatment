@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateCustomerinformationTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateCustomerinformationLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{customerinformationController.selected.id}" title="#{bundle.CreateCustomerinformationTitle_id}" required="true" requiredMessage="#{bundle.CreateCustomerinformationRequiredMessage_id}"/>
+                    <h:outputLabel value="#{bundle.CreateCustomerinformationLabel_recorddate}" for="recorddate" />
+                    <h:inputText id="recorddate" value="#{customerinformationController.selected.recorddate}" title="#{bundle.CreateCustomerinformationTitle_recorddate}" required="true" requiredMessage="#{bundle.CreateCustomerinformationRequiredMessage_recorddate}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateCustomerinformationLabel_recordprogram}" for="recordprogram" />
+                    <h:inputText id="recordprogram" value="#{customerinformationController.selected.recordprogram}" title="#{bundle.CreateCustomerinformationTitle_recordprogram}" required="true" requiredMessage="#{bundle.CreateCustomerinformationRequiredMessage_recordprogram}"/>
+                    <h:outputLabel value="#{bundle.CreateCustomerinformationLabel_recorduserid}" for="recorduserid" />
+                    <h:inputText id="recorduserid" value="#{customerinformationController.selected.recorduserid}" title="#{bundle.CreateCustomerinformationTitle_recorduserid}" required="true" requiredMessage="#{bundle.CreateCustomerinformationRequiredMessage_recorduserid}"/>
+                    <h:outputLabel value="#{bundle.CreateCustomerinformationLabel_recordvalid}" for="recordvalid" />
+                    <h:inputText id="recordvalid" value="#{customerinformationController.selected.recordvalid}" title="#{bundle.CreateCustomerinformationTitle_recordvalid}" required="true" requiredMessage="#{bundle.CreateCustomerinformationRequiredMessage_recordvalid}"/>
+                    <h:outputLabel value="#{bundle.CreateCustomerinformationLabel_customerid}" for="customerid" />
+                    <h:inputText id="customerid" value="#{customerinformationController.selected.customerid}" title="#{bundle.CreateCustomerinformationTitle_customerid}" required="true" requiredMessage="#{bundle.CreateCustomerinformationRequiredMessage_customerid}"/>
+                    <h:outputLabel value="#{bundle.CreateCustomerinformationLabel_firstvisitdate}" for="firstvisitdate" />
+                    <h:inputText id="firstvisitdate" value="#{customerinformationController.selected.firstvisitdate}" title="#{bundle.CreateCustomerinformationTitle_firstvisitdate}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateCustomerinformationLabel_introducer}" for="introducer" />
+                    <h:inputText id="introducer" value="#{customerinformationController.selected.introducer}" title="#{bundle.CreateCustomerinformationTitle_introducer}" />
+                    <h:outputLabel value="#{bundle.CreateCustomerinformationLabel_relationship}" for="relationship" />
+                    <h:inputText id="relationship" value="#{customerinformationController.selected.relationship}" title="#{bundle.CreateCustomerinformationTitle_relationship}" />
+                    <h:outputLabel value="#{bundle.CreateCustomerinformationLabel_anamnesis}" for="anamnesis" />
+                    <h:inputText id="anamnesis" value="#{customerinformationController.selected.anamnesis}" title="#{bundle.CreateCustomerinformationTitle_anamnesis}" />
+                    <h:outputLabel value="#{bundle.CreateCustomerinformationLabel_familymember}" for="familymember" />
+                    <h:inputText id="familymember" value="#{customerinformationController.selected.familymember}" title="#{bundle.CreateCustomerinformationTitle_familymember}" />
+                    <h:outputLabel value="#{bundle.CreateCustomerinformationLabel_familymedicalhistory}" for="familymedicalhistory" />
+                    <h:inputText id="familymedicalhistory" value="#{customerinformationController.selected.familymedicalhistory}" title="#{bundle.CreateCustomerinformationTitle_familymedicalhistory}" />
+                    <h:outputLabel value="#{bundle.CreateCustomerinformationLabel_job}" for="job" />
+                    <h:inputText id="job" value="#{customerinformationController.selected.job}" title="#{bundle.CreateCustomerinformationTitle_job}" />
+                    <h:outputLabel value="#{bundle.CreateCustomerinformationLabel_eating}" for="eating" />
+                    <h:inputText id="eating" value="#{customerinformationController.selected.eating}" title="#{bundle.CreateCustomerinformationTitle_eating}" />
+                    <h:outputLabel value="#{bundle.CreateCustomerinformationLabel_sleeping}" for="sleeping" />
+                    <h:inputText id="sleeping" value="#{customerinformationController.selected.sleeping}" title="#{bundle.CreateCustomerinformationTitle_sleeping}" />
+                    <h:outputLabel value="#{bundle.CreateCustomerinformationLabel_exercise}" for="exercise" />
+                    <h:inputText id="exercise" value="#{customerinformationController.selected.exercise}" title="#{bundle.CreateCustomerinformationTitle_exercise}" />
+                    <h:outputLabel value="#{bundle.CreateCustomerinformationLabel_smokingdrinking}" for="smokingdrinking" />
+                    <h:inputText id="smokingdrinking" value="#{customerinformationController.selected.smokingdrinking}" title="#{bundle.CreateCustomerinformationTitle_smokingdrinking}" />
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{customerinformationController.create}" value="#{bundle.CreateCustomerinformationSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{customerinformationController.prepareList}" value="#{bundle.CreateCustomerinformationShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateCustomerinformationIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

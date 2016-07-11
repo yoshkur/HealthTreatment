@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditCustomermasterTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditCustomermasterLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{customermasterController.selected.id}" title="#{bundle.EditCustomermasterTitle_id}" required="true" requiredMessage="#{bundle.EditCustomermasterRequiredMessage_id}"/>
+                    <h:outputLabel value="#{bundle.EditCustomermasterLabel_recorddate}" for="recorddate" />
+                    <h:inputText id="recorddate" value="#{customermasterController.selected.recorddate}" title="#{bundle.EditCustomermasterTitle_recorddate}" required="true" requiredMessage="#{bundle.EditCustomermasterRequiredMessage_recorddate}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditCustomermasterLabel_recordprogram}" for="recordprogram" />
+                    <h:inputText id="recordprogram" value="#{customermasterController.selected.recordprogram}" title="#{bundle.EditCustomermasterTitle_recordprogram}" required="true" requiredMessage="#{bundle.EditCustomermasterRequiredMessage_recordprogram}"/>
+                    <h:outputLabel value="#{bundle.EditCustomermasterLabel_recorduserid}" for="recorduserid" />
+                    <h:inputText id="recorduserid" value="#{customermasterController.selected.recorduserid}" title="#{bundle.EditCustomermasterTitle_recorduserid}" required="true" requiredMessage="#{bundle.EditCustomermasterRequiredMessage_recorduserid}"/>
+                    <h:outputLabel value="#{bundle.EditCustomermasterLabel_recordvalid}" for="recordvalid" />
+                    <h:inputText id="recordvalid" value="#{customermasterController.selected.recordvalid}" title="#{bundle.EditCustomermasterTitle_recordvalid}" required="true" requiredMessage="#{bundle.EditCustomermasterRequiredMessage_recordvalid}"/>
+                    <h:outputLabel value="#{bundle.EditCustomermasterLabel_fullname}" for="fullname" />
+                    <h:inputText id="fullname" value="#{customermasterController.selected.fullname}" title="#{bundle.EditCustomermasterTitle_fullname}" />
+                    <h:outputLabel value="#{bundle.EditCustomermasterLabel_ruby}" for="ruby" />
+                    <h:inputText id="ruby" value="#{customermasterController.selected.ruby}" title="#{bundle.EditCustomermasterTitle_ruby}" />
+                    <h:outputLabel value="#{bundle.EditCustomermasterLabel_sex}" for="sex" />
+                    <h:inputText id="sex" value="#{customermasterController.selected.sex}" title="#{bundle.EditCustomermasterTitle_sex}" />
+                    <h:outputLabel value="#{bundle.EditCustomermasterLabel_zip}" for="zip" />
+                    <h:inputText id="zip" value="#{customermasterController.selected.zip}" title="#{bundle.EditCustomermasterTitle_zip}" />
+                    <h:outputLabel value="#{bundle.EditCustomermasterLabel_address}" for="address" />
+                    <h:inputText id="address" value="#{customermasterController.selected.address}" title="#{bundle.EditCustomermasterTitle_address}" />
+                    <h:outputLabel value="#{bundle.EditCustomermasterLabel_phonenumber1}" for="phonenumber1" />
+                    <h:inputText id="phonenumber1" value="#{customermasterController.selected.phonenumber1}" title="#{bundle.EditCustomermasterTitle_phonenumber1}" />
+                    <h:outputLabel value="#{bundle.EditCustomermasterLabel_phonenumber2}" for="phonenumber2" />
+                    <h:inputText id="phonenumber2" value="#{customermasterController.selected.phonenumber2}" title="#{bundle.EditCustomermasterTitle_phonenumber2}" />
+                    <h:outputLabel value="#{bundle.EditCustomermasterLabel_birthday}" for="birthday" />
+                    <h:inputText id="birthday" value="#{customermasterController.selected.birthday}" title="#{bundle.EditCustomermasterTitle_birthday}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditCustomermasterLabel_customerinformationid}" for="customerinformationid" />
+                    <h:inputText id="customerinformationid" value="#{customermasterController.selected.customerinformationid}" title="#{bundle.EditCustomermasterTitle_customerinformationid}" />
+                </h:panelGrid>
+                <h:commandLink action="#{customermasterController.update}" value="#{bundle.EditCustomermasterSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditCustomermasterViewLink}"/>
+                <br />
+                <h:commandLink action="#{customermasterController.prepareList}" value="#{bundle.EditCustomermasterShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditCustomermasterIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

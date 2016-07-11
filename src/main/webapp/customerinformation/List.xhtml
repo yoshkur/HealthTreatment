@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListCustomerinformationTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListCustomerinformationEmpty}" rendered="#{customerinformationController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{customerinformationController.items.rowCount > 0}">
+                    <h:outputText value="#{customerinformationController.pagination.pageFirstItem + 1}..#{customerinformationController.pagination.pageLastItem + 1}/#{customerinformationController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{customerinformationController.previous}" value="#{bundle.Previous} #{customerinformationController.pagination.pageSize}" rendered="#{customerinformationController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{customerinformationController.next}" value="#{bundle.Next} #{customerinformationController.pagination.pageSize}" rendered="#{customerinformationController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{customerinformationController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCustomerinformationTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCustomerinformationTitle_recorddate}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.recorddate}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCustomerinformationTitle_recordprogram}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.recordprogram}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCustomerinformationTitle_recorduserid}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.recorduserid}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCustomerinformationTitle_recordvalid}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.recordvalid}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCustomerinformationTitle_customerid}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.customerid}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCustomerinformationTitle_firstvisitdate}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.firstvisitdate}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCustomerinformationTitle_introducer}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.introducer}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCustomerinformationTitle_relationship}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.relationship}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCustomerinformationTitle_anamnesis}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.anamnesis}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCustomerinformationTitle_familymember}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.familymember}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCustomerinformationTitle_familymedicalhistory}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.familymedicalhistory}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCustomerinformationTitle_job}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.job}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCustomerinformationTitle_eating}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.eating}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCustomerinformationTitle_sleeping}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.sleeping}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCustomerinformationTitle_exercise}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.exercise}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCustomerinformationTitle_smokingdrinking}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.smokingdrinking}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{customerinformationController.prepareView}" value="#{bundle.ListCustomerinformationViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{customerinformationController.prepareEdit}" value="#{bundle.ListCustomerinformationEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{customerinformationController.destroy}" value="#{bundle.ListCustomerinformationDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{customerinformationController.prepareCreate}" value="#{bundle.ListCustomerinformationCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListCustomerinformationIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

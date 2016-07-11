@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListTreatmentTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListTreatmentEmpty}" rendered="#{treatmentController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{treatmentController.items.rowCount > 0}">
+                    <h:outputText value="#{treatmentController.pagination.pageFirstItem + 1}..#{treatmentController.pagination.pageLastItem + 1}/#{treatmentController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{treatmentController.previous}" value="#{bundle.Previous} #{treatmentController.pagination.pageSize}" rendered="#{treatmentController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{treatmentController.next}" value="#{bundle.Next} #{treatmentController.pagination.pageSize}" rendered="#{treatmentController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{treatmentController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTreatmentTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTreatmentTitle_recorddate}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.recorddate}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTreatmentTitle_recordprogram}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.recordprogram}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTreatmentTitle_recorduserid}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.recorduserid}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTreatmentTitle_recordvalid}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.recordvalid}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTreatmentTitle_customerid}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.customerid}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTreatmentTitle_treatmentdate}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.treatmentdate}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTreatmentTitle_chiefcomplaint}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.chiefcomplaint}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTreatmentTitle_examination}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.examination}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTreatmentTitle_treatment}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.treatment}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTreatmentTitle_treatmentresult}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.treatmentresult}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTreatmentTitle_attachedfile}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.attachedfile}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTreatmentTitle_attachedfilename}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.attachedfilename}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTreatmentTitle_attachedfiledata}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.attachedfiledata}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{treatmentController.prepareView}" value="#{bundle.ListTreatmentViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{treatmentController.prepareEdit}" value="#{bundle.ListTreatmentEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{treatmentController.destroy}" value="#{bundle.ListTreatmentDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{treatmentController.prepareCreate}" value="#{bundle.ListTreatmentCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListTreatmentIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
