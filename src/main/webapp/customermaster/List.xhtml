@@ -80,17 +80,17 @@
                             <f:facet name="header">
                                 <p:outputLabel value="&nbsp;"/>
                             </f:facet>
-                            <h:commandLink action="#{customermasterController.prepareView}" value="#{bundle.ListCustomermasterViewLink}"/>
+                            <h:commandLink action="#{customermasterController.prepareView}" value="#{bundle.L閲覧}"/>
                             <p:outputLabel value=" "/>
-                            <h:commandLink action="#{customermasterController.prepareEdit}" value="#{bundle.ListCustomermasterEditLink}"/>
+                            <h:commandLink action="#{customermasterController.prepareEdit}" value="#{bundle.L編集}"/>
                         </p:column>
                         </p:dataTable>
                 </h:panelGroup>
                 <br />
-                <h:commandLink action="#{customermasterController.prepareCreate}" value="#{bundle.ListCustomermasterCreateLink}"/>
+                <h:commandLink action="#{customermasterController.prepareCreate}" value="#{bundle.L追加}"/>
                 <br />
                 <br />
-                <h:link outcome="/index" value="#{bundle.ListCustomermasterIndexLink}"/>
+                <h:link outcome="/index" value="#{bundle.Mトップ}"/>
             </h:form>
         </ui:define>
     </ui:composition>

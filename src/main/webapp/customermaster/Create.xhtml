@@ -33,13 +33,13 @@
                     <p:calendar id="birthday" value="#{customermasterController.selected.birthday}" pattern="yyyy/MM/dd" title="#{bundle.CreateCustomermasterTitle_birthday}" />
                 </p:panelGrid>
                 <br />
-                <h:commandLink action="#{customermasterController.create}" value="#{bundle.CreateCustomermasterSaveLink}" />
+                <h:commandLink action="#{customermasterController.create}" value="#{bundle.B追加}" />
                 <br />
                 <br />
-                <h:commandLink action="#{customermasterController.prepareList}" value="#{bundle.CreateCustomermasterShowAllLink}" immediate="true"/>
+                <h:commandLink action="#{customermasterController.prepareList}" value="#{bundle.L一覧}" immediate="true"/>
                 <br />
                 <br />
-                <h:link outcome="/index" value="#{bundle.CreateCustomermasterIndexLink}"/>
+                <h:link outcome="/index" value="#{bundle.Mトップ}"/>
             </h:form>
         </ui:define>
     </ui:composition>
