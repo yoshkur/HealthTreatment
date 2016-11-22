@@ -1,11 +1,19 @@
 package net.jp.kurata.healthtreatment.jsf;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import net.jp.kurata.healthtreatment.entity.Treatment;
 import net.jp.kurata.healthtreatment.jsf.util.JsfUtil;
 import net.jp.kurata.healthtreatment.jsf.util.PaginationHelper;
 import net.jp.kurata.healthtreatment.ejb.TreatmentFacade;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -17,6 +25,8 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import javax.inject.Inject;
+import javax.servlet.http.Part;
 
 @Named("treatmentController")
 @SessionScoped
@@ -28,6 +38,9 @@ public class TreatmentController implements Serializable {
     private net.jp.kurata.healthtreatment.ejb.TreatmentFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    private Part attachedFile;
+    @Inject
+    private CustomermasterController customerMaster;
 
     public TreatmentController() {
     }
@@ -62,6 +75,51 @@ public class TreatmentController implements Serializable {
         return pagination;
     }
 
+    public Part getAttachedFile() {
+        return attachedFile;
+    }
+
+    public void setAttachedFile(Part attachedFile) {
+        this.attachedFile = attachedFile;
+        this.convertFileField();
+    }
+
+    private void convertFileField() {
+        int BUFFER_SIZE = 1024;
+        ByteArrayOutputStream bout = new ByteArrayOutputStream();
+        try {
+            InputStream inputStream = this.attachedFile.getInputStream();
+            byte[] buffer = new byte[BUFFER_SIZE];
+            for (int len = inputStream.read(buffer); len >= 0; len = inputStream.read(buffer)) {
+                bout.write(buffer, 0, len);
+            }
+        } catch (IOException e) {
+
+        } finally {
+
+        }
+        this.getSelected().setAttachedfiledata(bout.toByteArray());
+        this.getSelected().setAttachedfilename(this.attachedFile.getName());
+
+    }
+
+    public File getFile() {
+        File file = new File(this.getSelected().getAttachedfilename());
+        try {
+            OutputStream out = new FileOutputStream(file);
+            out.write(this.getSelected().getAttachedfiledata());
+            out.flush();
+            out.close();
+        } catch (FileNotFoundException e) {
+
+        } catch (IOException e) {
+
+        } finally {
+
+        }
+        return file;
+    }
+
     public String prepareList() {
         recreateModel();
         return "List";
@@ -80,6 +138,12 @@ public class TreatmentController implements Serializable {
     }
 
     public String create() {
+        this.getSelected().setId(this.customerMaster.getSelected().getId());
+        this.getSelected().setRecorddate(new Date());
+        this.getSelected().setRecordprogram(this.getClass().getName());
+        this.getSelected().setRecorduserid("admin");
+        this.getSelected().setRecordvalid(true);
+        this.getSelected().setCustomerid(this.customerMaster.getSelected().getId());
         try {
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("TreatmentCreated"));
@@ -97,6 +161,10 @@ public class TreatmentController implements Serializable {
     }
 
     public String update() {
+        this.getSelected().setRecorddate(new Date());
+        this.getSelected().setRecordprogram(this.getClass().getName());
+        this.getSelected().setRecorduserid("admin");
+        this.getSelected().setRecordvalid(true);
         try {
             getFacade().edit(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("TreatmentUpdated"));

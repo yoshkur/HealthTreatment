@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:p="http://primefaces.org/ui">
 
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
@@ -14,40 +14,24 @@
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
             <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.CreateCustomermasterLabel_id}" for="id" />
-                    <h:inputText id="id" value="#{customermasterController.selected.id}" title="#{bundle.CreateCustomermasterTitle_id}" required="true" requiredMessage="#{bundle.CreateCustomermasterRequiredMessage_id}"/>
-                    <h:outputLabel value="#{bundle.CreateCustomermasterLabel_recorddate}" for="recorddate" />
-                    <h:inputText id="recorddate" value="#{customermasterController.selected.recorddate}" title="#{bundle.CreateCustomermasterTitle_recorddate}" required="true" requiredMessage="#{bundle.CreateCustomermasterRequiredMessage_recorddate}">
-                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                    </h:inputText>
-                    <h:outputLabel value="#{bundle.CreateCustomermasterLabel_recordprogram}" for="recordprogram" />
-                    <h:inputText id="recordprogram" value="#{customermasterController.selected.recordprogram}" title="#{bundle.CreateCustomermasterTitle_recordprogram}" required="true" requiredMessage="#{bundle.CreateCustomermasterRequiredMessage_recordprogram}"/>
-                    <h:outputLabel value="#{bundle.CreateCustomermasterLabel_recorduserid}" for="recorduserid" />
-                    <h:inputText id="recorduserid" value="#{customermasterController.selected.recorduserid}" title="#{bundle.CreateCustomermasterTitle_recorduserid}" required="true" requiredMessage="#{bundle.CreateCustomermasterRequiredMessage_recorduserid}"/>
-                    <h:outputLabel value="#{bundle.CreateCustomermasterLabel_recordvalid}" for="recordvalid" />
-                    <h:inputText id="recordvalid" value="#{customermasterController.selected.recordvalid}" title="#{bundle.CreateCustomermasterTitle_recordvalid}" required="true" requiredMessage="#{bundle.CreateCustomermasterRequiredMessage_recordvalid}"/>
-                    <h:outputLabel value="#{bundle.CreateCustomermasterLabel_fullname}" for="fullname" />
-                    <h:inputText id="fullname" value="#{customermasterController.selected.fullname}" title="#{bundle.CreateCustomermasterTitle_fullname}" />
-                    <h:outputLabel value="#{bundle.CreateCustomermasterLabel_ruby}" for="ruby" />
-                    <h:inputText id="ruby" value="#{customermasterController.selected.ruby}" title="#{bundle.CreateCustomermasterTitle_ruby}" />
-                    <h:outputLabel value="#{bundle.CreateCustomermasterLabel_sex}" for="sex" />
-                    <h:inputText id="sex" value="#{customermasterController.selected.sex}" title="#{bundle.CreateCustomermasterTitle_sex}" />
-                    <h:outputLabel value="#{bundle.CreateCustomermasterLabel_zip}" for="zip" />
-                    <h:inputText id="zip" value="#{customermasterController.selected.zip}" title="#{bundle.CreateCustomermasterTitle_zip}" />
-                    <h:outputLabel value="#{bundle.CreateCustomermasterLabel_address}" for="address" />
-                    <h:inputText id="address" value="#{customermasterController.selected.address}" title="#{bundle.CreateCustomermasterTitle_address}" />
-                    <h:outputLabel value="#{bundle.CreateCustomermasterLabel_phonenumber1}" for="phonenumber1" />
-                    <h:inputText id="phonenumber1" value="#{customermasterController.selected.phonenumber1}" title="#{bundle.CreateCustomermasterTitle_phonenumber1}" />
-                    <h:outputLabel value="#{bundle.CreateCustomermasterLabel_phonenumber2}" for="phonenumber2" />
-                    <h:inputText id="phonenumber2" value="#{customermasterController.selected.phonenumber2}" title="#{bundle.CreateCustomermasterTitle_phonenumber2}" />
-                    <h:outputLabel value="#{bundle.CreateCustomermasterLabel_birthday}" for="birthday" />
-                    <h:inputText id="birthday" value="#{customermasterController.selected.birthday}" title="#{bundle.CreateCustomermasterTitle_birthday}" >
-                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                    </h:inputText>
-                    <h:outputLabel value="#{bundle.CreateCustomermasterLabel_customerinformationid}" for="customerinformationid" />
-                    <h:inputText id="customerinformationid" value="#{customermasterController.selected.customerinformationid}" title="#{bundle.CreateCustomermasterTitle_customerinformationid}" />
-                </h:panelGrid>
+                <p:panelGrid columns="2">
+                    <p:outputLabel value="#{bundle.L氏名}" for="fullname" />
+                    <p:inputText id="fullname" value="#{customermasterController.selected.fullname}" title="#{bundle.CreateCustomermasterTitle_fullname}" />
+                    <p:outputLabel value="#{bundle.Lふりがな}" for="ruby" />
+                    <p:inputText id="ruby" value="#{customermasterController.selected.ruby}" title="#{bundle.CreateCustomermasterTitle_ruby}" />
+                    <p:outputLabel value="#{bundle.L性別}" for="sex" />
+                    <p:inputText id="sex" value="#{customermasterController.selected.sex}" title="#{bundle.CreateCustomermasterTitle_sex}" />
+                    <p:outputLabel value="#{bundle.L郵便番号}" for="zip" />
+                    <p:inputText id="zip" value="#{customermasterController.selected.zip}" title="#{bundle.CreateCustomermasterTitle_zip}" />
+                    <p:outputLabel value="#{bundle.L住所}" for="address" />
+                    <p:inputText id="address" value="#{customermasterController.selected.address}" title="#{bundle.CreateCustomermasterTitle_address}" />
+                    <p:outputLabel value="#{bundle.L電話番号1}" for="phonenumber1" />
+                    <p:inputText id="phonenumber1" value="#{customermasterController.selected.phonenumber1}" title="#{bundle.CreateCustomermasterTitle_phonenumber1}" />
+                    <p:outputLabel value="#{bundle.L電話番号2}" for="phonenumber2" />
+                    <p:inputText id="phonenumber2" value="#{customermasterController.selected.phonenumber2}" title="#{bundle.CreateCustomermasterTitle_phonenumber2}" />
+                    <p:outputLabel value="#{bundle.L生年月日}" for="birthday" />
+                    <p:calendar id="birthday" value="#{customermasterController.selected.birthday}" pattern="yyyy/MM/dd" title="#{bundle.CreateCustomermasterTitle_birthday}" />
+                </p:panelGrid>
                 <br />
                 <h:commandLink action="#{customermasterController.create}" value="#{bundle.CreateCustomermasterSaveLink}" />
                 <br />

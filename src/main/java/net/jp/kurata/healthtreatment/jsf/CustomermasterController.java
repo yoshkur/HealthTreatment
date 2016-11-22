@@ -6,6 +6,7 @@ import net.jp.kurata.healthtreatment.jsf.util.PaginationHelper;
 import net.jp.kurata.healthtreatment.ejb.CustomermasterFacade;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -80,6 +81,11 @@ public class CustomermasterController implements Serializable {
     }
 
     public String create() {
+        this.getSelected().setRecorddate(new Date());
+        this.getSelected().setRecordprogram(this.getClass().getName());
+        this.getSelected().setRecorduserid("admin");
+        this.getSelected().setRecordvalid(true);
+        this.getSelected().setCustomerinformationid(this.getSelected().getId());
         try {
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("CustomermasterCreated"));
@@ -97,6 +103,10 @@ public class CustomermasterController implements Serializable {
     }
 
     public String update() {
+        this.getSelected().setRecorddate(new Date());
+        this.getSelected().setRecordprogram(this.getClass().getName());
+        this.getSelected().setRecorduserid("admin");
+        this.getSelected().setRecordvalid(true);
         try {
             getFacade().edit(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("CustomermasterUpdated"));

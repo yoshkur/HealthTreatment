@@ -6,17 +6,56 @@
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title><ui:insert name="title">Default Title</ui:insert></title>
+        <title><ui:insert name="title">Default Title</ui:insert>　#{bundle.Lサイトタイトル}</title>
         <h:outputStylesheet library="css" name="jsfcrud.css"/>
+        <link rel="stylesheet" href="/HealthTreatment/resources/css/reset.css" type="text/css" />
+        <link rel="stylesheet" href="/HealthTreatment/resources/css/default.css" type="text/css" />
+        <link rel="stylesheet" href="/HealthTreatment/resources/css/style.css" type="text/css" />
+        <!--[if IE]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
     </h:head>
 
     <h:body>
-        <h1>
-            <ui:insert name="title">Default Title</ui:insert>
-        </h1>
-        <p>
-            <ui:insert name="body">Default Body</ui:insert>
-        </p>
+        <header>
+            <div class="header_left">
+                <h1>#{bundle.Lサイトタイトル}</h1>
+            </div>
+            <div class="header_right">
+                <address>〒 - 三重県津市</address>
+                <address>059-2**-****</address>
+            </div>
+            <div style="clear:both;"></div>
+            <div id="headermenu">
+                <ul>
+                    <li><h:link outcome="/index" value="トップページ" /></li>
+                </ul>
+            </div>
+        </header>
+        <section id="content">
+            <h2>
+                <ui:insert name="title">Default Title</ui:insert>
+            </h2>
+            <article>
+                <p>
+                    <ui:insert name="body">Default Body</ui:insert>
+                </p>
+            </article>
+        </section>
+
+        <nav>
+            <h:form>
+                <h3>メニュー</h3>
+                <ul>
+                    <li><h:link outcome="/index" value="トップページ" /></li>
+                </ul>
+            </h:form>
+        </nav>
+
+        <footer>
+            [フッター]
+        </footer>
+
     </h:body>
 
 </html>
