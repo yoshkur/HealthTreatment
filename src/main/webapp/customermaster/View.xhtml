@@ -37,14 +37,14 @@
                 </h:panelGrid>
                 <br />
                 <br />
-                <h:link outcome="Edit" value="#{bundle.ViewCustomermasterEditLink}"/>
+                <h:link outcome="Edit" value="#{bundle.L編集}"/>
                 <br />
-                <h:commandLink action="#{customermasterController.prepareCreate}" value="#{bundle.ViewCustomermasterCreateLink}" />
+                <h:commandLink action="#{customermasterController.prepareCreate}" value="#{bundle.L追加}" />
                 <br />
-                <h:commandLink action="#{customermasterController.prepareList}" value="#{bundle.ViewCustomermasterShowAllLink}"/>
+                <h:commandLink action="#{customermasterController.prepareList}" value="#{bundle.L一覧}"/>
                 <br />
                 <br />
-                <h:link outcome="/index" value="#{bundle.ViewCustomermasterIndexLink}"/>
+                <h:link outcome="/index" value="#{bundle.Mトップ}"/>
 
                 <h:panelGroup id="messagePanel" layout="block">
                     <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
@@ -57,44 +57,6 @@
                     <h:dataTable value="#{treatmentController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
                         <h:column>
                             <f:facet name="header">
-                                <p:outputLabel value="#{bundle.ListTreatmentTitle_id}"/>
-                            </f:facet>
-                            <p:outputLabel value="#{item.id}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <p:outputLabel value="#{bundle.ListTreatmentTitle_recorddate}"/>
-                            </f:facet>
-                            <p:outputLabel value="#{item.recorddate}">
-                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                            </p:outputLabel>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <p:outputLabel value="#{bundle.ListTreatmentTitle_recordprogram}"/>
-                            </f:facet>
-                            <p:outputLabel value="#{item.recordprogram}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <p:outputLabel value="#{bundle.ListTreatmentTitle_recorduserid}"/>
-                            </f:facet>
-                            <p:outputLabel value="#{item.recorduserid}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <p:outputLabel value="#{bundle.ListTreatmentTitle_recordvalid}"/>
-                            </f:facet>
-                            <p:outputLabel value="#{item.recordvalid}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <p:outputLabel value="#{bundle.ListTreatmentTitle_customerid}"/>
-                            </f:facet>
-                            <p:outputLabel value="#{item.customerid}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
                                 <p:outputLabel value="#{bundle.ListTreatmentTitle_treatmentdate}"/>
                             </f:facet>
                             <p:outputLabel value="#{item.treatmentdate}">
@@ -103,60 +65,22 @@
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <p:outputLabel value="#{bundle.ListTreatmentTitle_chiefcomplaint}"/>
+                                <p:outputLabel value="#{bundle.L主訴}"/>
                             </f:facet>
                             <p:outputLabel value="#{item.chiefcomplaint}"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <p:outputLabel value="#{bundle.ListTreatmentTitle_examination}"/>
-                            </f:facet>
-                            <p:outputLabel value="#{item.examination}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <p:outputLabel value="#{bundle.ListTreatmentTitle_treatment}"/>
-                            </f:facet>
-                            <p:outputLabel value="#{item.treatment}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <p:outputLabel value="#{bundle.ListTreatmentTitle_treatmentresult}"/>
-                            </f:facet>
-                            <p:outputLabel value="#{item.treatmentresult}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <p:outputLabel value="#{bundle.ListTreatmentTitle_attachedfile}"/>
-                            </f:facet>
-                            <p:outputLabel value="#{item.attachedfile}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <p:outputLabel value="#{bundle.ListTreatmentTitle_attachedfilename}"/>
-                            </f:facet>
-                            <p:outputLabel value="#{item.attachedfilename}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <p:outputLabel value="#{bundle.ListTreatmentTitle_attachedfiledata}"/>
-                            </f:facet>
-                            <p:outputLabel value="#{item.attachedfiledata}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
                                 <p:outputLabel value="&nbsp;"/>
                             </f:facet>
-                            <h:commandLink action="#{treatmentController.prepareView}" value="#{bundle.ListTreatmentViewLink}"/>
+                            <h:commandLink action="#{treatmentController.prepareView}" value="#{bundle.ListTreatmentTitle}"/>
                             <p:outputLabel value=" "/>
-                            <h:commandLink action="#{treatmentController.prepareEdit}" value="#{bundle.ListTreatmentEditLink}"/>
-                            <p:outputLabel value=" "/>
-                            <h:commandLink action="#{treatmentController.destroy}" value="#{bundle.ListTreatmentDestroyLink}"/>
+                            <h:commandLink action="#{treatmentController.prepareEdit}" value="#{bundle.ViewTreatmentTitle}"/>
                         </h:column>
                     </h:dataTable>
                 </h:panelGroup>
                 <br />
-                <h:commandLink action="#{treatmentController.prepareCreate}" value="#{bundle.ListTreatmentCreateLink}"/>
+                <h:commandLink action="#{treatmentController.prepareCreate}" value="#{bundle.CreateTreatmentTitle}"/>
             </h:form>
         </ui:define>
     </ui:composition>

@@ -64,19 +64,19 @@ public class CustomerinformationController implements Serializable {
 
     public String prepareList() {
         recreateModel();
-        return "List";
+        return "/customerinformation/List?faces-redirect=true";
     }
 
     public String prepareView() {
         current = (Customerinformation) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
-        return "View";
+        return "/customerinformation/View?faces-redirect=true";
     }
 
     public String prepareCreate() {
         current = new Customerinformation();
         selectedItemIndex = -1;
-        return "Create";
+        return "/customerinformation/Create?faces-redirect=true";
     }
 
     public String create() {
@@ -93,14 +93,14 @@ public class CustomerinformationController implements Serializable {
     public String prepareEdit() {
         current = (Customerinformation) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
-        return "Edit";
+        return "/customerinformation/Edit?faces-redirect=true";
     }
 
     public String update() {
         try {
             getFacade().edit(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("CustomerinformationUpdated"));
-            return "View";
+            return "/customerinformation/View?faces-redirect=true";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
@@ -113,7 +113,7 @@ public class CustomerinformationController implements Serializable {
         performDestroy();
         recreatePagination();
         recreateModel();
-        return "List";
+        return "/customerinformation/List?faces-redirect=true";
     }
 
     public String destroyAndView() {
@@ -121,11 +121,11 @@ public class CustomerinformationController implements Serializable {
         recreateModel();
         updateCurrentItem();
         if (selectedItemIndex >= 0) {
-            return "View";
+            return "/customerinformation/View?faces-redirect=true";
         } else {
             // all items were removed - go back to list
             recreateModel();
-            return "List";
+            return "/customerinformation/List?faces-redirect=true";
         }
     }
 
@@ -171,13 +171,13 @@ public class CustomerinformationController implements Serializable {
     public String next() {
         getPagination().nextPage();
         recreateModel();
-        return "List";
+        return "/customerinformation/List?faces-redirect=true";
     }
 
     public String previous() {
         getPagination().previousPage();
         recreateModel();
-        return "List";
+        return "/customerinformation/List?faces-redirect=true";
     }
 
     public SelectItem[] getItemsAvailableSelectMany() {
