@@ -16,21 +16,21 @@
             <h:form>
                 <p:panelGrid columns="2">
                     <p:outputLabel value="#{bundle.L氏名}" for="fullname" />
-                    <p:inputText id="fullname" value="#{customermasterController.selected.fullname}" title="#{bundle.CreateCustomermasterTitle_fullname}" />
+                    <p:inputText id="fullname" value="#{customermasterController.selected.fullname}" title="#{bundle.L氏名}" />
                     <p:outputLabel value="#{bundle.Lふりがな}" for="ruby" />
-                    <p:inputText id="ruby" value="#{customermasterController.selected.ruby}" title="#{bundle.CreateCustomermasterTitle_ruby}" />
+                    <p:inputText id="ruby" value="#{customermasterController.selected.ruby}" title="#{bundle.Lふりがな}" />
                     <p:outputLabel value="#{bundle.L性別}" for="sex" />
-                    <p:inputText id="sex" value="#{customermasterController.selected.sex}" title="#{bundle.CreateCustomermasterTitle_sex}" />
+                    <p:inputText id="sex" value="#{customermasterController.selected.sex}" title="#{bundle.L性別}" />
                     <p:outputLabel value="#{bundle.L郵便番号}" for="zip" />
-                    <p:inputText id="zip" value="#{customermasterController.selected.zip}" title="#{bundle.CreateCustomermasterTitle_zip}" />
+                    <p:inputText id="zip" value="#{customermasterController.selected.zip}" title="#{bundle.L郵便番号}" />
                     <p:outputLabel value="#{bundle.L住所}" for="address" />
-                    <p:inputText id="address" value="#{customermasterController.selected.address}" title="#{bundle.CreateCustomermasterTitle_address}" />
+                    <p:inputText id="address" value="#{customermasterController.selected.address}" title="#{bundle.L住所}" />
                     <p:outputLabel value="#{bundle.L電話番号1}" for="phonenumber1" />
-                    <p:inputText id="phonenumber1" value="#{customermasterController.selected.phonenumber1}" title="#{bundle.CreateCustomermasterTitle_phonenumber1}" />
+                    <p:inputText id="phonenumber1" value="#{customermasterController.selected.phonenumber1}" title="#{bundle.L電話番号1}" />
                     <p:outputLabel value="#{bundle.L電話番号2}" for="phonenumber2" />
-                    <p:inputText id="phonenumber2" value="#{customermasterController.selected.phonenumber2}" title="#{bundle.CreateCustomermasterTitle_phonenumber2}" />
+                    <p:inputText id="phonenumber2" value="#{customermasterController.selected.phonenumber2}" title="#{bundle.L電話番号2}" />
                     <p:outputLabel value="#{bundle.L生年月日}" for="birthday" />
-                    <p:calendar id="birthday" value="#{customermasterController.selected.birthday}" pattern="yyyy/MM/dd" title="#{bundle.CreateCustomermasterTitle_birthday}" />
+                    <p:calendar id="birthday" value="#{customermasterController.selected.birthday}" pattern="yyyy/MM/dd" title="#{bundle.L生年月日}" />
                 </p:panelGrid>
                 <br />
                 <h:commandLink action="#{customermasterController.create}" value="#{bundle.B追加}" />

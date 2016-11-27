@@ -15,6 +15,9 @@
                 <h:panelGroup id="messagePanel" layout="block">
                     <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
                 </h:panelGroup>
+                <h:panelGroup id="condition" layout="block">
+                    <h:link outcome="Search" value="絞り込み条件指定" />
+                </h:panelGroup>
                 <p:outputLabel escape="false" value="#{bundle.ListCustomermasterEmpty}" rendered="#{customermasterController.items.rowCount == 0}"/>
                 <h:panelGroup rendered="#{customermasterController.items.rowCount > 0}">
                     <p:outputLabel value="#{customermasterController.pagination.pageFirstItem + 1}..#{customermasterController.pagination.pageLastItem + 1}/#{customermasterController.pagination.itemsCount}"/>&nbsp;
@@ -84,7 +87,7 @@
                             <p:outputLabel value=" "/>
                             <h:commandLink action="#{customermasterController.prepareEdit}" value="#{bundle.L編集}"/>
                         </p:column>
-                        </p:dataTable>
+                    </p:dataTable>
                 </h:panelGroup>
                 <br />
                 <h:commandLink action="#{customermasterController.prepareCreate}" value="#{bundle.L追加}"/>

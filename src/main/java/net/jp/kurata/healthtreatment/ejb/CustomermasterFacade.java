@@ -78,6 +78,26 @@ public class CustomermasterFacade extends AbstractFacade<Customermaster> {
             cq.select(root).where(predicate, cb.like(root.get(Customermaster_.fullname).as(String.class), "%" + condition.getFullname() + "%"));
             predicate = cq.getRestriction();
         }
+        if (condition.getRuby() != null) {
+            cq.select(root).where(predicate, cb.like(root.get(Customermaster_.ruby).as(String.class), "%" + condition.getRuby() + "%"));
+            predicate = cq.getRestriction();
+        }
+        if (condition.getSex() != null) {
+            cq.select(root).where(predicate, cb.like(root.get(Customermaster_.sex).as(String.class), "%" + condition.getSex() + "%"));
+            predicate = cq.getRestriction();
+        }
+        if (condition.getPhonenumber1() != null) {
+            cq.select(root).where(predicate, cb.like(root.get(Customermaster_.phonenumber1).as(String.class), "%" + condition.getPhonenumber1() + "%"));
+            predicate = cq.getRestriction();
+        }
+        if (condition.getPhonenumber2() != null) {
+            cq.select(root).where(predicate, cb.like(root.get(Customermaster_.phonenumber2).as(String.class), "%" + condition.getPhonenumber2() + "%"));
+            predicate = cq.getRestriction();
+        }
+        if (condition.getBirthday() != null) {
+            cq.select(root).where(predicate, cb.equal(root.get(Customermaster_.birthday), condition.getBirthday()));
+            predicate = cq.getRestriction();
+        }
         return cq;
     }
 
