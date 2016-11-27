@@ -11,14 +11,16 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.PrintWriter;
 import java.net.URLEncoder;
+import javax.ejb.EJB;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import net.jp.kurata.healthtreatment.ejb.TreatmentattachedfileFacade;
+import net.jp.kurata.healthtreatment.entity.Treatmentattachedfile;
 import net.jp.kurata.healthtreatment.jsf.TreatmentController;
 
 /**
@@ -30,6 +32,8 @@ public class TreatmentAttacheFileDownload extends HttpServlet {
 
     @Inject
     TreatmentController treatmentController;
+    @EJB
+    TreatmentattachedfileFacade ejb;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,11 +47,11 @@ public class TreatmentAttacheFileDownload extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try (OutputStream out = response.getOutputStream()) {
-            AttachedFile treatmentAttachedFile = new AttachedFile(this.treatmentController.getFile());
+            Treatmentattachedfile treatmentAttachedFile = this.ejb.find(this.treatmentController.getSelected().getId());
             response.setContentType("application/force-download");
-            response.setContentLength(treatmentAttachedFile.getDatafile().length);
-            response.setHeader("Content-Disposition", "attachment; filename*=\"" + URLEncoder.encode(treatmentAttachedFile.getFilename(), "UTF-8") + "\"");
-            out.write(treatmentAttachedFile.getDatafile());
+            response.setContentLength(treatmentAttachedFile.getAttachedfiledata().length);
+            response.setHeader("Content-Disposition", "attachment; filename*=\"" + URLEncoder.encode(treatmentAttachedFile.getAttachedfilename(), "UTF-8") + "\"");
+            out.write(treatmentAttachedFile.getAttachedfiledata());
         }
     }
 

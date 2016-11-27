@@ -80,8 +80,8 @@ public class Treatment implements Serializable {
     private Boolean attachedfile;
     @Size(max = 2147483647)
     private String attachedfilename;
-    @Lob
-    private byte[] attachedfiledata;
+//    @Lob
+//    private byte[] attachedfiledata;
 
     public Treatment() {
     }
@@ -203,13 +203,13 @@ public class Treatment implements Serializable {
         this.attachedfilename = attachedfilename;
     }
 
-    public byte[] getAttachedfiledata() {
-        return attachedfiledata;
-    }
-
-    public void setAttachedfiledata(byte[] attachedfiledata) {
-        this.attachedfiledata = attachedfiledata;
-    }
+//    public byte[] getAttachedfiledata() {
+//        return attachedfiledata;
+//    }
+//
+//    public void setAttachedfiledata(byte[] attachedfiledata) {
+//        this.attachedfiledata = attachedfiledata;
+//    }
 
     @Override
     public int hashCode() {

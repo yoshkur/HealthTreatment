@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditTreatmentattachedfileTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditTreatmentattachedfileLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{treatmentattachedfileController.selected.id}" title="#{bundle.EditTreatmentattachedfileTitle_id}" required="true" requiredMessage="#{bundle.EditTreatmentattachedfileRequiredMessage_id}"/>
+                    <h:outputLabel value="#{bundle.EditTreatmentattachedfileLabel_recorddate}" for="recorddate" />
+                    <h:inputText id="recorddate" value="#{treatmentattachedfileController.selected.recorddate}" title="#{bundle.EditTreatmentattachedfileTitle_recorddate}" required="true" requiredMessage="#{bundle.EditTreatmentattachedfileRequiredMessage_recorddate}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditTreatmentattachedfileLabel_recordprogram}" for="recordprogram" />
+                    <h:inputText id="recordprogram" value="#{treatmentattachedfileController.selected.recordprogram}" title="#{bundle.EditTreatmentattachedfileTitle_recordprogram}" required="true" requiredMessage="#{bundle.EditTreatmentattachedfileRequiredMessage_recordprogram}"/>
+                    <h:outputLabel value="#{bundle.EditTreatmentattachedfileLabel_recorduserid}" for="recorduserid" />
+                    <h:inputText id="recorduserid" value="#{treatmentattachedfileController.selected.recorduserid}" title="#{bundle.EditTreatmentattachedfileTitle_recorduserid}" required="true" requiredMessage="#{bundle.EditTreatmentattachedfileRequiredMessage_recorduserid}"/>
+                    <h:outputLabel value="#{bundle.EditTreatmentattachedfileLabel_recordvalid}" for="recordvalid" />
+                    <h:inputText id="recordvalid" value="#{treatmentattachedfileController.selected.recordvalid}" title="#{bundle.EditTreatmentattachedfileTitle_recordvalid}" required="true" requiredMessage="#{bundle.EditTreatmentattachedfileRequiredMessage_recordvalid}"/>
+                    <h:outputLabel value="#{bundle.EditTreatmentattachedfileLabel_attachedfilename}" for="attachedfilename" />
+                    <h:inputText id="attachedfilename" value="#{treatmentattachedfileController.selected.attachedfilename}" title="#{bundle.EditTreatmentattachedfileTitle_attachedfilename}" />
+                    <h:outputLabel value="#{bundle.EditTreatmentattachedfileLabel_attachedfiledata}" for="attachedfiledata" />
+                    <h:inputText id="attachedfiledata" value="#{treatmentattachedfileController.selected.attachedfiledata}" title="#{bundle.EditTreatmentattachedfileTitle_attachedfiledata}" />
+                </h:panelGrid>
+                <h:commandLink action="#{treatmentattachedfileController.update}" value="#{bundle.EditTreatmentattachedfileSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditTreatmentattachedfileViewLink}"/>
+                <br />
+                <h:commandLink action="#{treatmentattachedfileController.prepareList}" value="#{bundle.EditTreatmentattachedfileShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditTreatmentattachedfileIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,12 +1,8 @@
 package net.jp.kurata.healthtreatment.jsf;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import net.jp.kurata.healthtreatment.entity.Treatment;
 import net.jp.kurata.healthtreatment.jsf.util.JsfUtil;
 import net.jp.kurata.healthtreatment.jsf.util.PaginationHelper;
@@ -45,6 +41,8 @@ public class TreatmentController implements Serializable {
     private CustomermasterController customerMaster;
     private TreatmentSearchCondition condition;
     private Integer pageSize = 20;
+    @Inject
+    private TreatmentattachedfileController treatmentattachedfileController;
 
     public TreatmentController() {
     }
@@ -100,11 +98,12 @@ public class TreatmentController implements Serializable {
         this.attachedFile = attachedFile;
         if (this.attachedFile != null) {
             this.getSelected().setAttachedfile(Boolean.TRUE);
+            this.getSelected().setAttachedfilename(null);
             this.convertFileField();
         } else {
             this.getSelected().setAttachedfile(Boolean.FALSE);
-            this.getSelected().setAttachedfilename(null);
-            this.getSelected().setAttachedfiledata(null);
+            this.getSelected().setAttachedfilename(this.attachedFile.getSubmittedFileName());
+            this.treatmentattachedfileController.destroy();
         }
     }
 
@@ -122,30 +121,29 @@ public class TreatmentController implements Serializable {
         } finally {
 
         }
-        this.getSelected().setAttachedfiledata(bout.toByteArray());
-        this.getSelected().setAttachedfilename(this.attachedFile.getSubmittedFileName());
+        this.treatmentattachedfileController.getSelected().setAttachedfiledata(bout.toByteArray());
+        this.treatmentattachedfileController.getSelected().setAttachedfilename(this.attachedFile.getSubmittedFileName());
 
     }
 
-    public File getFile() {
-        File file = null;
-        if (this.getSelected().getAttachedfile()) {
-            file = new File(this.getSelected().getAttachedfilename());
-            try {
-                OutputStream out = new FileOutputStream(file);
-                out.write(this.getSelected().getAttachedfiledata());
-                out.flush();
-                out.close();
-            } catch (FileNotFoundException e) {
-
-            } catch (IOException e) {
-
-            } finally {
-            }
-        }
-        return file;
-    }
-
+//    public File getFile() {
+//        File file = null;
+//        if (this.getSelected().getAttachedfile()) {
+//            file = new File(this.getSelected().getAttachedfilename());
+//            try {
+//                OutputStream out = new FileOutputStream(file);
+//                out.write(this.getSelected().getAttachedfiledata());
+//                out.flush();
+//                out.close();
+//            } catch (FileNotFoundException e) {
+//
+//            } catch (IOException e) {
+//
+//            } finally {
+//            }
+//        }
+//        return file;
+//    }
     public Integer getPageSize() {
         return pageSize;
     }
@@ -183,7 +181,10 @@ public class TreatmentController implements Serializable {
         try {
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("TreatmentCreated"));
-            return prepareCreate();
+            if (this.getSelected().getAttachedfile()) {
+                this.treatmentattachedfileController.create();
+            }
+            return prepareList();
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewTreatmentattachedfileTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewTreatmentattachedfileLabel_id}"/>
+                    <h:outputText value="#{treatmentattachedfileController.selected.id}" title="#{bundle.ViewTreatmentattachedfileTitle_id}"/>
+                    <h:outputText value="#{bundle.ViewTreatmentattachedfileLabel_recorddate}"/>
+                    <h:outputText value="#{treatmentattachedfileController.selected.recorddate}" title="#{bundle.ViewTreatmentattachedfileTitle_recorddate}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewTreatmentattachedfileLabel_recordprogram}"/>
+                    <h:outputText value="#{treatmentattachedfileController.selected.recordprogram}" title="#{bundle.ViewTreatmentattachedfileTitle_recordprogram}"/>
+                    <h:outputText value="#{bundle.ViewTreatmentattachedfileLabel_recorduserid}"/>
+                    <h:outputText value="#{treatmentattachedfileController.selected.recorduserid}" title="#{bundle.ViewTreatmentattachedfileTitle_recorduserid}"/>
+                    <h:outputText value="#{bundle.ViewTreatmentattachedfileLabel_recordvalid}"/>
+                    <h:outputText value="#{treatmentattachedfileController.selected.recordvalid}" title="#{bundle.ViewTreatmentattachedfileTitle_recordvalid}"/>
+                    <h:outputText value="#{bundle.ViewTreatmentattachedfileLabel_attachedfilename}"/>
+                    <h:outputText value="#{treatmentattachedfileController.selected.attachedfilename}" title="#{bundle.ViewTreatmentattachedfileTitle_attachedfilename}"/>
+                    <h:outputText value="#{bundle.ViewTreatmentattachedfileLabel_attachedfiledata}"/>
+                    <h:outputText value="#{treatmentattachedfileController.selected.attachedfiledata}" title="#{bundle.ViewTreatmentattachedfileTitle_attachedfiledata}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{treatmentattachedfileController.destroyAndView}" value="#{bundle.ViewTreatmentattachedfileDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewTreatmentattachedfileEditLink}"/>
+                <br />
+                <h:commandLink action="#{treatmentattachedfileController.prepareCreate}" value="#{bundle.ViewTreatmentattachedfileCreateLink}" />
+                <br />
+                <h:commandLink action="#{treatmentattachedfileController.prepareList}" value="#{bundle.ViewTreatmentattachedfileShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewTreatmentattachedfileIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
