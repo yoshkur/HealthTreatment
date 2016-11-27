@@ -42,9 +42,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Treatment.findByTreatmentresult", query = "SELECT t FROM Treatment t WHERE t.treatmentresult = :treatmentresult"),
     @NamedQuery(name = "Treatment.findByAttachedfile", query = "SELECT t FROM Treatment t WHERE t.attachedfile = :attachedfile"),
     @NamedQuery(name = "Treatment.findByAttachedfilename", query = "SELECT t FROM Treatment t WHERE t.attachedfilename = :attachedfilename")})
+@SuppressWarnings("serial")
 public class Treatment implements Serializable {
 
-    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -225,15 +225,12 @@ public class Treatment implements Serializable {
             return false;
         }
         Treatment other = (Treatment) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+        return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
     }
 
     @Override
     public String toString() {
         return "net.jp.kurata.healthtreatment.entity.Treatment[ id=" + id + " ]";
     }
-    
+
 }

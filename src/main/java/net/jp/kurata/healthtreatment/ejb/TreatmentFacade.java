@@ -5,6 +5,8 @@
  */
 package net.jp.kurata.healthtreatment.ejb;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -14,7 +16,6 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import net.jp.kurata.healthtreatment.entity.Customermaster;
 import net.jp.kurata.healthtreatment.entity.Treatment;
 import net.jp.kurata.healthtreatment.entity.Treatment_;
 import net.jp.kurata.healthtreatment.jsf.treatment.TreatmentSearchCondition;
@@ -38,20 +39,20 @@ public class TreatmentFacade extends AbstractFacade<Treatment> {
         super(Treatment.class);
     }
 
-    public List<Customermaster> findRequestAll(TreatmentSearchCondition condition) {
+    public List<Treatment> findRequestAll(TreatmentSearchCondition condition) {
         CriteriaBuilder cb = this.getEntityManager().getCriteriaBuilder();
-        CriteriaQuery<Customermaster> cq = cb.createQuery(Customermaster.class);
-        Root<Customermaster> root = cq.from(Customermaster.class);
+        CriteriaQuery<Treatment> cq = cb.createQuery(Treatment.class);
+        Root<Treatment> root = cq.from(Treatment.class);
         cq = this.getSearchQuery(condition, cb, cq, root);
         this.setOrderby(condition, cb, cq, root);
         Query q = this.getEntityManager().createQuery(cq);
         return q.getResultList();
     }
 
-    public List<Customermaster> findRequestRange(int[] range, TreatmentSearchCondition condition) {
+    public List<Treatment> findRequestRange(int[] range, TreatmentSearchCondition condition) {
         CriteriaBuilder cb = this.getEntityManager().getCriteriaBuilder();
-        CriteriaQuery<Customermaster> cq = cb.createQuery(Customermaster.class);
-        Root<Customermaster> root = cq.from(Customermaster.class);
+        CriteriaQuery<Treatment> cq = cb.createQuery(Treatment.class);
+        Root<Treatment> root = cq.from(Treatment.class);
         cq = this.getSearchQuery(condition, cb, cq, root);
         this.setOrderby(condition, cb, cq, root);
         Query q = this.getEntityManager().createQuery(cq);
@@ -63,7 +64,7 @@ public class TreatmentFacade extends AbstractFacade<Treatment> {
     public int countRequest(TreatmentSearchCondition condition) {
         CriteriaBuilder cb = this.getEntityManager().getCriteriaBuilder();
         CriteriaQuery cq = cb.createQuery();
-        Root<Customermaster> root = cq.from(Customermaster.class);
+        Root<Treatment> root = cq.from(Treatment.class);
         cq = this.getSearchQuery(condition, cb, cq, root);
 
         cq.select(cb.count(root));
@@ -75,8 +76,36 @@ public class TreatmentFacade extends AbstractFacade<Treatment> {
         Predicate predicate;
         cq.select(root).where(cb.equal(root.get(Treatment_.recordvalid), true));
         predicate = cq.getRestriction();
+        if (condition.getCustomerid() != null) {
+            cq.select(root).where(predicate, cb.equal(root.get(Treatment_.customerid), condition.getCustomerid()));
+            predicate = cq.getRestriction();
+        }
+        if (condition.getTreatmentdateStart() != null) {
+            cq.select(root).where(predicate, cb.greaterThanOrEqualTo(root.get(Treatment_.treatmentdate), condition.getTreatmentdateStart()));
+            predicate = cq.getRestriction();
+        }
+        if (condition.getTreatmentdateEnd() != null) {
+            Calendar upper = Calendar.getInstance();
+            upper.setTime(condition.getTreatmentdateEnd());
+            upper.add(Calendar.DATE, 1);
+            Date turnEnd = upper.getTime();
+            cq.select(root).where(predicate, cb.lessThan(root.get(Treatment_.treatmentdate), turnEnd));
+            predicate = cq.getRestriction();
+        }
         if (condition.getChiefcomplaint() != null) {
             cq.select(root).where(predicate, cb.like(root.get(Treatment_.chiefcomplaint).as(String.class), "%" + condition.getChiefcomplaint() + "%"));
+            predicate = cq.getRestriction();
+        }
+        if (condition.getExamination() != null) {
+            cq.select(root).where(predicate, cb.like(root.get(Treatment_.examination).as(String.class), "%" + condition.getExamination() + "%"));
+            predicate = cq.getRestriction();
+        }
+        if (condition.getTreatment() != null) {
+            cq.select(root).where(predicate, cb.like(root.get(Treatment_.treatment).as(String.class), "%" + condition.getTreatment() + "%"));
+            predicate = cq.getRestriction();
+        }
+        if (condition.getTreatmentresult() != null) {
+            cq.select(root).where(predicate, cb.like(root.get(Treatment_.treatmentresult).as(String.class), "%" + condition.getTreatmentresult() + "%"));
             predicate = cq.getRestriction();
         }
         return cq;

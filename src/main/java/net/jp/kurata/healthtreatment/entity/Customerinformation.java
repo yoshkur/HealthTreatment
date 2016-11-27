@@ -45,9 +45,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Customerinformation.findBySleeping", query = "SELECT c FROM Customerinformation c WHERE c.sleeping = :sleeping"),
     @NamedQuery(name = "Customerinformation.findByExercise", query = "SELECT c FROM Customerinformation c WHERE c.exercise = :exercise"),
     @NamedQuery(name = "Customerinformation.findBySmokingdrinking", query = "SELECT c FROM Customerinformation c WHERE c.smokingdrinking = :smokingdrinking")})
+@SuppressWarnings("serial")
 public class Customerinformation implements Serializable {
 
-    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -269,5 +269,5 @@ public class Customerinformation implements Serializable {
     public String toString() {
         return "net.jp.kurata.healthtreatment.entity.Customerinformation[ id=" + id + " ]";
     }
-    
+
 }

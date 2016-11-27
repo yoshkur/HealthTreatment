@@ -3,7 +3,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
     <ui:composition template="/template.xhtml">
@@ -14,30 +13,26 @@
             <h:panelGroup id="messagePanel" layout="block">
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
-            <h:form>
+            <h:form enctype="multipart/form-data">
                 <h:panelGrid columns="2">
-                    <p:outputLabel value="#{bundle.CreateTreatmentLabel_treatmentdate}" for="treatmentdate" />
-                    <p:calendar id="treatmentdate" pattern="yyyy/MM/dd" value="#{treatmentController.selected.treatmentdate}" title="#{bundle.CreateTreatmentTitle_treatmentdate}" >
-                    <p:outputLabel value="#{bundle.CreateTreatmentLabel_chiefcomplaint}" for="chiefcomplaint" />
-                    <p:inputTextarea id="chiefcomplaint" value="#{treatmentController.selected.chiefcomplaint}" title="#{bundle.CreateTreatmentTitle_chiefcomplaint}" />
-                    <p:outputLabel value="#{bundle.CreateTreatmentLabel_examination}" for="examination" />
-                    <p:inputTextarea id="examination" value="#{treatmentController.selected.examination}" title="#{bundle.CreateTreatmentTitle_examination}" />
-                    <p:outputLabel value="#{bundle.CreateTreatmentLabel_treatment}" for="treatment" />
-                    <p:inputTextarea id="treatment" value="#{treatmentController.selected.treatment}" title="#{bundle.CreateTreatmentTitle_treatment}" />
-                    <p:outputLabel value="#{bundle.CreateTreatmentLabel_treatmentresult}" for="treatmentresult" />
-                    <p:inputTextarea id="treatmentresult" value="#{treatmentController.selected.treatmentresult}" title="#{bundle.CreateTreatmentTitle_treatmentresult}" />
-                    <p:outputLabel value="#{bundle.CreateTreatmentLabel_attachedfile}" for="attachedfile" />
-                    <h:inputFile id="attachedfile" value="#{treatmentController.attachedFile}" title="#{bundle.CreateTreatmentTitle_attachedfile}" />
-                    <h:inputTextarea rows="4" cols="30" id="attachedfiledata" value="#{treatmentController.selected.attachedfiledata}" title="#{bundle.CreateTreatmentTitle_attachedfiledata}" />
+                    <p:outputLabel value="#{bundle.L施術日}" for="treatmentdate" />
+                    <p:calendar id="treatmentdate" pattern="yyyy/MM/dd" value="#{treatmentController.selected.treatmentdate}" title="#{bundle.L施術日}" />
+                    <p:outputLabel value="#{bundle.L主訴}" for="chiefcomplaint" />
+                    <p:inputTextarea id="chiefcomplaint" value="#{treatmentController.selected.chiefcomplaint}" title="#{bundle.L主訴}" />
+                    <p:outputLabel value="#{bundle.L診察}" for="examination" />
+                    <p:inputTextarea id="examination" value="#{treatmentController.selected.examination}" title="#{bundle.L診察}" />
+                    <p:outputLabel value="#{bundle.L施術}" for="treatment" />
+                    <p:inputTextarea id="treatment" value="#{treatmentController.selected.treatment}" title="#{bundle.L施術}" />
+                    <p:outputLabel value="#{bundle.L施術結果}" for="treatmentresult" />
+                    <p:inputTextarea id="treatmentresult" value="#{treatmentController.selected.treatmentresult}" title="#{bundle.L施術結果}" />
+                    <p:outputLabel value="#{bundle.L添付ファイル}" for="attachedfile" />
+                    <h:inputFile id="attachedfile" value="#{treatmentController.attachedFile}" title="#{bundle.L添付ファイル}" />
                 </h:panelGrid>
                 <br />
-                <h:commandLink action="#{treatmentController.create}" value="#{bundle.CreateTreatmentSaveLink}" />
+                <h:commandLink action="#{treatmentController.create}" value="#{bundle.B追加}" />
                 <br />
                 <br />
-                <h:commandLink action="#{treatmentController.prepareList}" value="#{bundle.CreateTreatmentShowAllLink}" immediate="true"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.CreateTreatmentIndexLink}"/>
+                <h:link outcome="/index" value="#{bundle.Mトップ}"/>
             </h:form>
         </ui:define>
     </ui:composition>

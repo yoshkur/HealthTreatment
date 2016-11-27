@@ -37,14 +37,12 @@
                 </h:panelGrid>
                 <br />
                 <br />
-                <h:link outcome="Edit" value="#{bundle.L編集}"/>
-                <br />
-                <h:commandLink action="#{customermasterController.prepareCreate}" value="#{bundle.L追加}" />
+                <p:link outcome="Edit" value="#{bundle.L編集}"/>
                 <br />
                 <h:commandLink action="#{customermasterController.prepareList}" value="#{bundle.L一覧}"/>
                 <br />
                 <br />
-                <h:link outcome="/index" value="#{bundle.Mトップ}"/>
+                <p:link outcome="/index" value="#{bundle.Mトップ}"/>
 
                 <h:panelGroup id="messagePanel" layout="block">
                     <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
@@ -54,30 +52,37 @@
                     <p:outputLabel value="#{treatmentController.pagination.pageFirstItem + 1}..#{treatmentController.pagination.pageLastItem + 1}/#{treatmentController.pagination.itemsCount}"/>&nbsp;
                     <h:commandLink action="#{treatmentController.previous}" value="#{bundle.Previous} #{treatmentController.pagination.pageSize}" rendered="#{treatmentController.pagination.hasPreviousPage}"/>&nbsp;
                     <h:commandLink action="#{treatmentController.next}" value="#{bundle.Next} #{treatmentController.pagination.pageSize}" rendered="#{treatmentController.pagination.hasNextPage}"/>&nbsp;
-                    <h:dataTable value="#{treatmentController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
-                        <h:column>
+                    <p:dataTable value="#{treatmentController.items}" var="item"
+                                 resizableColumns="true" liveResize="false"
+                                 paginator="false"
+                                 rowKey="#{item.id}"
+                                 rows="#{treatmentController.pagination.pageSize}"
+                                 >
+                        <p:column>
                             <f:facet name="header">
-                                <p:outputLabel value="#{bundle.ListTreatmentTitle_treatmentdate}"/>
+                                <p:outputLabel value="#{bundle.L施術日}"/>
                             </f:facet>
                             <p:outputLabel value="#{item.treatmentdate}">
                                 <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
                             </p:outputLabel>
-                        </h:column>
-                        <h:column>
+                        </p:column>
+                        <p:column>
                             <f:facet name="header">
                                 <p:outputLabel value="#{bundle.L主訴}"/>
                             </f:facet>
                             <p:outputLabel value="#{item.chiefcomplaint}"/>
-                        </h:column>
-                        <h:column>
+                        </p:column>
+                        <p:column>
                             <f:facet name="header">
                                 <p:outputLabel value="&nbsp;"/>
                             </f:facet>
-                            <h:commandLink action="#{treatmentController.prepareView}" value="#{bundle.ListTreatmentTitle}"/>
+                            <h:commandLink action="#{treatmentController.prepareView}" value="#{bundle.L閲覧}"/>
                             <p:outputLabel value=" "/>
-                            <h:commandLink action="#{treatmentController.prepareEdit}" value="#{bundle.ViewTreatmentTitle}"/>
-                        </h:column>
-                    </h:dataTable>
+                            <h:commandLink action="#{treatmentController.prepareEdit}" value="#{bundle.L編集}"/>
+                        </p:column>
+                    </p:dataTable>
+                    <h:commandLink action="#{treatmentController.previous}" value="#{bundle.Previous} #{treatmentController.pagination.pageSize}" rendered="#{treatmentController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{treatmentController.next}" value="#{bundle.Next} #{treatmentController.pagination.pageSize}" rendered="#{treatmentController.pagination.hasNextPage}"/>&nbsp;
                 </h:panelGroup>
                 <br />
                 <h:commandLink action="#{treatmentController.prepareCreate}" value="#{bundle.CreateTreatmentTitle}"/>

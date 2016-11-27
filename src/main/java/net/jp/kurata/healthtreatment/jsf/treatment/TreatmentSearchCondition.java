@@ -14,7 +14,9 @@ import net.jp.kurata.healthtreatment.jsf.util.SearchCondition;
  */
 public class TreatmentSearchCondition extends SearchCondition {
 
-    private Date treatmentdate;
+    private Integer customerid;
+    private Date treatmentdateStart;
+    private Date treatmentdateEnd;
     private String chiefcomplaint;
     private String examination;
     private String treatment;
@@ -22,12 +24,28 @@ public class TreatmentSearchCondition extends SearchCondition {
     private Boolean attachedfile;
     private String attachedfilename;
 
-    public Date getTreatmentdate() {
-        return treatmentdate;
+    public Integer getCustomerid() {
+        return customerid;
     }
 
-    public void setTreatmentdate(Date treatmentdate) {
-        this.treatmentdate = treatmentdate;
+    public void setCustomerid(Integer customerid) {
+        this.customerid = customerid;
+    }
+
+    public Date getTreatmentdateStart() {
+        return treatmentdateStart;
+    }
+
+    public void setTreatmentdateStart(Date treatmentdateStart) {
+        this.treatmentdateStart = treatmentdateStart;
+    }
+
+    public Date getTreatmentdateEnd() {
+        return treatmentdateEnd;
+    }
+
+    public void setTreatmentdateEnd(Date treatmentdateEnd) {
+        this.treatmentdateEnd = treatmentdateEnd;
     }
 
     public String getChiefcomplaint() {

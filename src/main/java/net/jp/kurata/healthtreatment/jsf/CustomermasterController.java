@@ -18,6 +18,10 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import javax.inject.Inject;
+import net.jp.kurata.healthtreatment.entity.Treatment_;
+import net.jp.kurata.healthtreatment.jsf.customermaster.CustomerMasterSearchCondition;
+import net.jp.kurata.healthtreatment.jsf.treatment.TreatmentSearchCondition;
 
 @Named("customermasterController")
 @SessionScoped
@@ -29,6 +33,10 @@ public class CustomermasterController implements Serializable {
     private net.jp.kurata.healthtreatment.ejb.CustomermasterFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    private CustomerMasterSearchCondition condition;
+    private Integer pageSize = 20;
+    @Inject
+    private TreatmentController treatmentController;
 
     public CustomermasterController() {
     }
@@ -47,20 +55,41 @@ public class CustomermasterController implements Serializable {
 
     public PaginationHelper getPagination() {
         if (pagination == null) {
-            pagination = new PaginationHelper(10) {
+            pagination = new PaginationHelper(getPageSize()) {
 
                 @Override
                 public int getItemsCount() {
-                    return getFacade().count();
+//                    return getFacade().count();
+                    return getFacade().countRequest(getCondition());
                 }
 
                 @Override
                 public DataModel createPageDataModel() {
-                    return new ListDataModel(getFacade().findRange(new int[]{getPageFirstItem(), getPageFirstItem() + getPageSize()}));
+//                    return new ListDataModel(getFacade().findRange(new int[]{getPageFirstItem(), getPageFirstItem() + getPageSize()}));
+                    return new ListDataModel(getFacade().findRequestRange(new int[]{getPageFirstItem(), getPageFirstItem() + getPageSize()}, getCondition()));
                 }
             };
         }
         return pagination;
+    }
+
+    public CustomerMasterSearchCondition getCondition() {
+        if (this.condition == null) {
+            this.condition = new CustomerMasterSearchCondition();
+        }
+        return condition;
+    }
+
+    public void setCondition(CustomerMasterSearchCondition condition) {
+        this.condition = condition;
+    }
+
+    public Integer getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
     }
 
     public String prepareList() {
@@ -71,6 +100,7 @@ public class CustomermasterController implements Serializable {
     public String prepareView() {
         current = (Customermaster) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        this.treatmentController.prepareList();
         return "/customermaster/View?faces-redirect=true";
     }
 

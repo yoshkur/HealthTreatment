@@ -27,6 +27,8 @@ import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 import javax.servlet.http.Part;
+import net.jp.kurata.healthtreatment.entity.Treatment_;
+import net.jp.kurata.healthtreatment.jsf.treatment.TreatmentSearchCondition;
 
 @Named("treatmentController")
 @SessionScoped
@@ -41,6 +43,8 @@ public class TreatmentController implements Serializable {
     private Part attachedFile;
     @Inject
     private CustomermasterController customerMaster;
+    private TreatmentSearchCondition condition;
+    private Integer pageSize = 20;
 
     public TreatmentController() {
     }
@@ -59,20 +63,33 @@ public class TreatmentController implements Serializable {
 
     public PaginationHelper getPagination() {
         if (pagination == null) {
-            pagination = new PaginationHelper(10) {
+            pagination = new PaginationHelper(getPageSize()) {
 
                 @Override
                 public int getItemsCount() {
-                    return getFacade().count();
+//                    return getFacade().count();
+                    return getFacade().countRequest(getCondition());
                 }
 
                 @Override
                 public DataModel createPageDataModel() {
-                    return new ListDataModel(getFacade().findRange(new int[]{getPageFirstItem(), getPageFirstItem() + getPageSize()}));
+//                    return new ListDataModel(getFacade().findRange(new int[]{getPageFirstItem(), getPageFirstItem() + getPageSize()}));
+                    return new ListDataModel(getFacade().findRequestRange(new int[]{getPageFirstItem(), getPageFirstItem() + getPageSize()}, getCondition()));
                 }
             };
         }
         return pagination;
+    }
+
+    public TreatmentSearchCondition getCondition() {
+        if (this.condition == null) {
+            this.condition = new TreatmentSearchCondition();
+        }
+        return condition;
+    }
+
+    public void setCondition(TreatmentSearchCondition condition) {
+        this.condition = condition;
     }
 
     public Part getAttachedFile() {
@@ -81,7 +98,14 @@ public class TreatmentController implements Serializable {
 
     public void setAttachedFile(Part attachedFile) {
         this.attachedFile = attachedFile;
-        this.convertFileField();
+        if (this.attachedFile != null) {
+            this.getSelected().setAttachedfile(Boolean.TRUE);
+            this.convertFileField();
+        } else {
+            this.getSelected().setAttachedfile(Boolean.FALSE);
+            this.getSelected().setAttachedfilename(null);
+            this.getSelected().setAttachedfiledata(null);
+        }
     }
 
     private void convertFileField() {
@@ -99,7 +123,7 @@ public class TreatmentController implements Serializable {
 
         }
         this.getSelected().setAttachedfiledata(bout.toByteArray());
-        this.getSelected().setAttachedfilename(this.attachedFile.getName());
+        this.getSelected().setAttachedfilename(this.attachedFile.getSubmittedFileName());
 
     }
 
@@ -120,9 +144,20 @@ public class TreatmentController implements Serializable {
         return file;
     }
 
+    public Integer getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
+    }
+
     public String prepareList() {
+        this.getCondition().setCustomerid(this.customerMaster.getSelected().getId());
+        this.getCondition().setOrderBy(Treatment_.treatmentdate);
+        this.getCondition().setAsc(Boolean.FALSE);
         recreateModel();
-        return "/treatment/List?faces-redirect=true";
+        return "/customermaster/View?faces-redirect=true";
     }
 
     public String prepareView() {
@@ -138,7 +173,6 @@ public class TreatmentController implements Serializable {
     }
 
     public String create() {
-        this.getSelected().setId(this.customerMaster.getSelected().getId());
         this.getSelected().setRecorddate(new Date());
         this.getSelected().setRecordprogram(this.getClass().getName());
         this.getSelected().setRecorduserid("admin");
@@ -181,7 +215,7 @@ public class TreatmentController implements Serializable {
         performDestroy();
         recreatePagination();
         recreateModel();
-        return "/treatment/List?faces-redirect=true";
+        return "/customermaster/View?faces-redirect=true";
     }
 
     public String destroyAndView() {
@@ -193,7 +227,7 @@ public class TreatmentController implements Serializable {
         } else {
             // all items were removed - go back to list
             recreateModel();
-            return "/treatment/List?faces-redirect=true";
+            return "/customermaster/View?faces-redirect=true";
         }
     }
 
@@ -239,13 +273,13 @@ public class TreatmentController implements Serializable {
     public String next() {
         getPagination().nextPage();
         recreateModel();
-        return "/treatment/List?faces-redirect=true";
+        return "/customermaster/View?faces-redirect=true";
     }
 
     public String previous() {
         getPagination().previousPage();
         recreateModel();
-        return "/treatment/List?faces-redirect=true";
+        return "/customermaster/View?faces-redirect=true";
     }
 
     public SelectItem[] getItemsAvailableSelectMany() {

@@ -42,9 +42,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Customermaster.findByPhonenumber2", query = "SELECT c FROM Customermaster c WHERE c.phonenumber2 = :phonenumber2"),
     @NamedQuery(name = "Customermaster.findByBirthday", query = "SELECT c FROM Customermaster c WHERE c.birthday = :birthday"),
     @NamedQuery(name = "Customermaster.findByCustomerinformationid", query = "SELECT c FROM Customermaster c WHERE c.customerinformationid = :customerinformationid")})
+@SuppressWarnings("serial")
 public class Customermaster implements Serializable {
 
-    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -233,5 +233,5 @@ public class Customermaster implements Serializable {
     public String toString() {
         return "net.jp.kurata.healthtreatment.entity.Customermaster[ id=" + id + " ]";
     }
-    
+
 }
