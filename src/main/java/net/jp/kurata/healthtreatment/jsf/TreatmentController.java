@@ -128,18 +128,20 @@ public class TreatmentController implements Serializable {
     }
 
     public File getFile() {
-        File file = new File(this.getSelected().getAttachedfilename());
-        try {
-            OutputStream out = new FileOutputStream(file);
-            out.write(this.getSelected().getAttachedfiledata());
-            out.flush();
-            out.close();
-        } catch (FileNotFoundException e) {
+        File file = null;
+        if (this.getSelected().getAttachedfile()) {
+            file = new File(this.getSelected().getAttachedfilename());
+            try {
+                OutputStream out = new FileOutputStream(file);
+                out.write(this.getSelected().getAttachedfiledata());
+                out.flush();
+                out.close();
+            } catch (FileNotFoundException e) {
 
-        } catch (IOException e) {
+            } catch (IOException e) {
 
-        } finally {
-
+            } finally {
+            }
         }
         return file;
     }

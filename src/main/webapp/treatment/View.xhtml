@@ -8,7 +8,7 @@
 
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
-            <h:outputText value="#{bundle.ViewTreatmentTitle}"></h:outputText>
+            <p:outputLabel value="#{bundle.ViewTreatmentTitle}"></p:outputLabel>
         </ui:define>
         <ui:define name="body">
             <h:panelGroup id="messagePanel" layout="block">
@@ -16,33 +16,29 @@
             </h:panelGroup>
             <h:form>
                 <p:panelGrid columns="2">
-                    <h:outputText value="#{bundle.ViewTreatmentLabel_treatmentdate}"/>
-                    <h:outputText value="#{treatmentController.selected.treatmentdate}" title="#{bundle.ViewTreatmentTitle_treatmentdate}">
+                    <p:outputLabel value="#{bundle.L施術日}"/>
+                    <p:outputLabel value="#{treatmentController.selected.treatmentdate}" title="#{bundle.L施術日}">
                         <f:convertDateTime pattern="yyyy/MM/dd" />
-                    </h:outputText>
-                    <h:outputText value="#{bundle.ViewTreatmentLabel_chiefcomplaint}"/>
-                    <h:outputText value="#{treatmentController.selected.chiefcomplaint}" title="#{bundle.ViewTreatmentTitle_chiefcomplaint}"/>
-                    <h:outputText value="#{bundle.ViewTreatmentLabel_examination}"/>
-                    <h:outputText value="#{treatmentController.selected.examination}" title="#{bundle.ViewTreatmentTitle_examination}"/>
-                    <h:outputText value="#{bundle.ViewTreatmentLabel_treatment}"/>
-                    <h:outputText value="#{treatmentController.selected.treatment}" title="#{bundle.ViewTreatmentTitle_treatment}"/>
-                    <h:outputText value="#{bundle.ViewTreatmentLabel_treatmentresult}"/>
-                    <h:outputText value="#{treatmentController.selected.treatmentresult}" title="#{bundle.ViewTreatmentTitle_treatmentresult}"/>
-                    <h:outputText value="#{bundle.ViewTreatmentLabel_attachedfile}" rendered="#{treatmentController.selected.attachedfile}"/>
-                    <img src="#{treatmentController.file}" rendered="#{treatmentController.selected.attachedfile}"/>
-                    </h:panelGrid>
-                    <br />
-                    <h:commandLink action="#{treatmentController.destroyAndView}" value="#{bundle.ViewTreatmentDestroyLink}"/>
-                    <br />
-                    <br />
-                    <h:link outcome="Edit" value="#{bundle.ViewTreatmentEditLink}"/>
-                    <br />
-                    <h:commandLink action="#{treatmentController.prepareCreate}" value="#{bundle.ViewTreatmentCreateLink}" />
-                    <br />
-                    <h:commandLink action="#{treatmentController.prepareList}" value="#{bundle.ViewTreatmentShowAllLink}"/>
-                    <br />
-                    <br />
-                    <h:link outcome="/index" value="#{bundle.ViewTreatmentIndexLink}"/>
+                    </p:outputLabel>
+                    <p:outputLabel value="#{bundle.L主訴}"/>
+                    <p:outputLabel value="#{treatmentController.selected.chiefcomplaint}" title="#{bundle.L主訴}"/>
+                    <p:outputLabel value="#{bundle.L診察}"/>
+                    <p:outputLabel value="#{treatmentController.selected.examination}" title="#{bundle.L診察}"/>
+                    <p:outputLabel value="#{bundle.L施術}"/>
+                    <p:outputLabel value="#{treatmentController.selected.treatment}" title="#{bundle.L施術}"/>
+                    <p:outputLabel value="#{bundle.L施術結果}"/>
+                    <p:outputLabel value="#{treatmentController.selected.treatmentresult}" title="#{bundle.L施術結果}"/>
+                    <p:outputLabel value="#{bundle.L添付ファイル}" rendered="#{treatmentController.selected.attachedfile}"/>
+                    <p:graphicImage value="/TreatmentAttacheFileDownload" rendered="#{treatmentController.selected.attachedfile}"/>
+                </p:panelGrid>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.L編集}"/>
+                <br />
+                <h:commandLink action="#{treatmentController.prepareList}" value="#{bundle.L一覧}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.Mトップ}"/>
 
             </h:form>
         </ui:define>
