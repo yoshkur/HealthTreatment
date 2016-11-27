@@ -16,7 +16,7 @@
             <h:form enctype="multipart/form-data">
                 <h:panelGrid columns="2">
                     <p:outputLabel value="#{bundle.L施術日}" for="treatmentdate" />
-                    <p:calendar id="treatmentdate" pattern="yyyy/MM/dd" value="#{treatmentController.selected.treatmentdate}" title="#{bundle.L施術日}" />
+                    <p:calendar id="treatmentdate" pattern="yyyy/MM/dd HH:mm" value="#{treatmentController.selected.treatmentdate}" title="#{bundle.L施術日}" />
                     <p:outputLabel value="#{bundle.L主訴}" for="chiefcomplaint" />
                     <p:inputTextarea id="chiefcomplaint" value="#{treatmentController.selected.chiefcomplaint}" title="#{bundle.L主訴}" />
                     <p:outputLabel value="#{bundle.L診察}" for="examination" />
