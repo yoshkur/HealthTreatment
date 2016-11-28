@@ -16,32 +16,31 @@
             </h:panelGroup>
             <h:form>
                 <p:panelGrid columns="2">
-                    <p:outputLabel value="#{bundle.EditCustomermasterLabel_fullname}" for="fullname" />
-                    <p:inputText id="fullname" value="#{customermasterController.selected.fullname}" title="#{bundle.EditCustomermasterTitle_fullname}" />
-                    <p:outputLabel value="#{bundle.EditCustomermasterLabel_ruby}" for="ruby" />
-                    <p:inputText id="ruby" value="#{customermasterController.selected.ruby}" title="#{bundle.EditCustomermasterTitle_ruby}" />
-                    <p:outputLabel value="#{bundle.EditCustomermasterLabel_sex}" for="sex" />
-                    <p:inputText id="sex" value="#{customermasterController.selected.sex}" title="#{bundle.EditCustomermasterTitle_sex}" />
-                    <p:outputLabel value="#{bundle.EditCustomermasterLabel_zip}" for="zip" />
-                    <p:inputText id="zip" value="#{customermasterController.selected.zip}" title="#{bundle.EditCustomermasterTitle_zip}" />
-                    <p:outputLabel value="#{bundle.EditCustomermasterLabel_address}" for="address" />
-                    <p:inputText id="address" value="#{customermasterController.selected.address}" title="#{bundle.EditCustomermasterTitle_address}" />
-                    <p:outputLabel value="#{bundle.EditCustomermasterLabel_phonenumber1}" for="phonenumber1" />
-                    <p:inputText id="phonenumber1" value="#{customermasterController.selected.phonenumber1}" title="#{bundle.EditCustomermasterTitle_phonenumber1}" />
-                    <p:outputLabel value="#{bundle.EditCustomermasterLabel_phonenumber2}" for="phonenumber2" />
-                    <p:inputText id="phonenumber2" value="#{customermasterController.selected.phonenumber2}" title="#{bundle.EditCustomermasterTitle_phonenumber2}" />
-                    <p:outputLabel value="#{bundle.EditCustomermasterLabel_birthday}" for="birthday" />
-                    <p:calendar id="birthday" value="#{customermasterController.selected.birthday}" pattern="yyyy/MM/dd" title="#{bundle.EditCustomermasterTitle_birthday}" />
-                    </h:panelGrid>
-                    <h:commandLink action="#{customermasterController.update}" value="#{bundle.EditCustomermasterSaveLink}"/>
+                    <p:outputLabel value="#{bundle.L顧客ID}" for="id" />
+                    <p:outputLabel id="id" value="#{customermasterController.selected.id}" title="#{bundle.L顧客ID}" />
+                    <p:outputLabel value="#{bundle.L氏名}" for="fullname" />
+                    <p:inputText id="fullname" value="#{customermasterController.selected.fullname}" title="#{bundle.L氏名}" />
+                    <p:outputLabel value="#{bundle.Lふりがな}" for="ruby" />
+                    <p:inputText id="ruby" value="#{customermasterController.selected.ruby}" title="#{bundle.Lふりがな}" />
+                    <p:outputLabel value="#{bundle.L性別}" for="sex" />
+                    <p:inputText id="sex" value="#{customermasterController.selected.sex}" title="#{bundle.L性別}" />
+                    <p:outputLabel value="#{bundle.L郵便番号}" for="zip" />
+                    <p:inputText id="zip" value="#{customermasterController.selected.zip}" title="#{bundle.L郵便番号}" />
+                    <p:outputLabel value="#{bundle.L住所}" for="address" />
+                    <p:inputText id="address" value="#{customermasterController.selected.address}" title="#{bundle.L住所}" />
+                    <p:outputLabel value="#{bundle.L電話番号1}" for="phonenumber1" />
+                    <p:inputText id="phonenumber1" value="#{customermasterController.selected.phonenumber1}" title="#{bundle.L電話番号1}" />
+                    <p:outputLabel value="#{bundle.L電話番号2}" for="phonenumber2" />
+                    <p:inputText id="phonenumber2" value="#{customermasterController.selected.phonenumber2}" title="#{bundle.L電話番号2}" />
+                    <p:outputLabel value="#{bundle.L生年月日}" for="birthday" />
+                    <p:calendar id="birthday" value="#{customermasterController.selected.birthday}" pattern="yyyy/MM/dd" title="#{bundle.L生年月日}" />
+                    </p:panelGrid>
+                    <h:commandLink action="#{customermasterController.update}" value="#{bundle.B編集}"/>
                     <br />
                     <br />
-                    <h:link outcome="View" value="#{bundle.EditCustomermasterViewLink}"/>
+                    <h:link outcome="View" value="#{bundle.L閲覧}"/>
                     <br />
-                    <h:commandLink action="#{customermasterController.prepareList}" value="#{bundle.EditCustomermasterShowAllLink}" immediate="true"/>
-                    <br />
-                    <br />
-                    <h:link outcome="/index" value="#{bundle.EditCustomermasterIndexLink}" />
+                    <h:commandLink action="#{customermasterController.prepareList}" value="#{bundle.L一覧}" immediate="true"/>
             </h:form>
         </ui:define>
     </ui:composition>

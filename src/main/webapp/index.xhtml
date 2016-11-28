@@ -1,23 +1,18 @@
-<?xml version='1.0' encoding='UTF-8' ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
-    <h:head>
-        <title>Facelet Title</title>
-        <h:outputStylesheet name="css/jsfcrud.css"/>
-    </h:head>
-    <h:body>
-        Hello from Facelets
-        <br />
-        <h:link outcome="/customermaster/List" value="Show All Customermaster Items"/>
-        <br />
-        <h:link outcome="welcomePrimefaces" value="Primefacesようこそページ" />
-        <br />
-        <h:link outcome="/treatmentattachedfile/List" value="Show All Treatmentattachedfile Items"/>
-    </h:body>
 
-
-
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="メニュー"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:link outcome="/customermaster/List" value="#{bundle.ListCustomermasterTitle}"/>
+            <br />
+        </ui:define>
+    </ui:composition>
 
 </html>
 
