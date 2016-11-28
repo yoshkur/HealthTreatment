@@ -98,11 +98,11 @@ public class TreatmentController implements Serializable {
         this.attachedFile = attachedFile;
         if (this.attachedFile != null) {
             this.getSelected().setAttachedfile(Boolean.TRUE);
-            this.getSelected().setAttachedfilename(null);
+            this.getSelected().setAttachedfilename(this.attachedFile.getSubmittedFileName());
             this.convertFileField();
         } else {
             this.getSelected().setAttachedfile(Boolean.FALSE);
-            this.getSelected().setAttachedfilename(this.attachedFile.getSubmittedFileName());
+            this.getSelected().setAttachedfilename(null);
             this.treatmentattachedfileController.destroy();
         }
     }
@@ -126,24 +126,6 @@ public class TreatmentController implements Serializable {
 
     }
 
-//    public File getFile() {
-//        File file = null;
-//        if (this.getSelected().getAttachedfile()) {
-//            file = new File(this.getSelected().getAttachedfilename());
-//            try {
-//                OutputStream out = new FileOutputStream(file);
-//                out.write(this.getSelected().getAttachedfiledata());
-//                out.flush();
-//                out.close();
-//            } catch (FileNotFoundException e) {
-//
-//            } catch (IOException e) {
-//
-//            } finally {
-//            }
-//        }
-//        return file;
-//    }
     public Integer getPageSize() {
         return pageSize;
     }
