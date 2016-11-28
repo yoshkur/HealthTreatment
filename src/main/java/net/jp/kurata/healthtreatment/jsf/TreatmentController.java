@@ -23,6 +23,8 @@ import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 import javax.servlet.http.Part;
+import net.jp.kurata.healthtreatment.ejb.TreatmentattachedfileFacade;
+import net.jp.kurata.healthtreatment.entity.Treatmentattachedfile;
 import net.jp.kurata.healthtreatment.entity.Treatment_;
 import net.jp.kurata.healthtreatment.jsf.treatment.TreatmentSearchCondition;
 
@@ -41,8 +43,9 @@ public class TreatmentController implements Serializable {
     private CustomermasterController customerMaster;
     private TreatmentSearchCondition condition;
     private Integer pageSize = 20;
-    @Inject
-    private TreatmentattachedfileController treatmentattachedfileController;
+    @EJB
+    private TreatmentattachedfileFacade treatmentAttachedfileEjb;
+    private Treatmentattachedfile treatmentAttachedFile;
 
     public TreatmentController() {
     }
@@ -65,13 +68,11 @@ public class TreatmentController implements Serializable {
 
                 @Override
                 public int getItemsCount() {
-//                    return getFacade().count();
                     return getFacade().countRequest(getCondition());
                 }
 
                 @Override
                 public DataModel createPageDataModel() {
-//                    return new ListDataModel(getFacade().findRange(new int[]{getPageFirstItem(), getPageFirstItem() + getPageSize()}));
                     return new ListDataModel(getFacade().findRequestRange(new int[]{getPageFirstItem(), getPageFirstItem() + getPageSize()}, getCondition()));
                 }
             };
@@ -103,7 +104,9 @@ public class TreatmentController implements Serializable {
         } else {
             this.getSelected().setAttachedfile(Boolean.FALSE);
             this.getSelected().setAttachedfilename(null);
-            this.treatmentattachedfileController.destroy();
+            if (this.treatmentAttachedfileEjb.find(this.getSelected().getId()) != null) {
+                this.treatmentAttachedfileEjb.remove(this.getTreatmentAttachedFile());
+            }
         }
     }
 
@@ -121,9 +124,48 @@ public class TreatmentController implements Serializable {
         } finally {
 
         }
-        this.treatmentattachedfileController.getSelected().setAttachedfiledata(bout.toByteArray());
-        this.treatmentattachedfileController.getSelected().setAttachedfilename(this.attachedFile.getSubmittedFileName());
+        this.getTreatmentAttachedFile().setAttachedfiledata(bout.toByteArray());
+        this.getTreatmentAttachedFile().setAttachedfilename(this.attachedFile.getSubmittedFileName());
+    }
 
+    public TreatmentattachedfileFacade getTreatmentAttachedfileEjb() {
+        return treatmentAttachedfileEjb;
+    }
+
+    public void setTreatmentAttachedfileEjb(TreatmentattachedfileFacade treatmentAttachedfileEjb) {
+        this.treatmentAttachedfileEjb = treatmentAttachedfileEjb;
+    }
+
+    public Treatmentattachedfile getTreatmentAttachedFile() {
+        if (this.treatmentAttachedFile == null) {
+            try {
+                this.treatmentAttachedFile = this.treatmentAttachedfileEjb.find(this.getSelected().getId());
+            } catch (Exception e) {
+
+            }
+        }
+        if (this.treatmentAttachedFile == null) {
+            this.treatmentAttachedFile = new Treatmentattachedfile();
+        }
+        return treatmentAttachedFile;
+    }
+
+    public void setTreatmentAttachedFile(Treatmentattachedfile treatmentAttachedFile) {
+        this.treatmentAttachedFile = treatmentAttachedFile;
+    }
+
+    private void persistTreatmentAttachedFile() {
+        if (this.treatmentAttachedfileEjb.find(this.getSelected().getId()) == null) {
+            this.treatmentAttachedFile.setId(this.getSelected().getId());
+            this.treatmentAttachedFile.setRecorddate(new Date());
+            this.treatmentAttachedFile.setRecordprogram(this.getClass().getName());
+            this.treatmentAttachedFile.setRecorduserid("admin");
+            this.treatmentAttachedFile.setRecordvalid(true);
+            this.treatmentAttachedfileEjb.create(this.treatmentAttachedFile);
+        } else {
+            this.treatmentAttachedfileEjb.edit(this.treatmentAttachedFile);
+        }
+        this.treatmentAttachedFile = null;
     }
 
     public Integer getPageSize() {
@@ -163,9 +205,7 @@ public class TreatmentController implements Serializable {
         try {
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("TreatmentCreated"));
-            if (this.getSelected().getAttachedfile()) {
-                this.treatmentattachedfileController.create();
-            }
+            this.persistTreatmentAttachedFile();
             return prepareList();
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
@@ -187,6 +227,7 @@ public class TreatmentController implements Serializable {
         try {
             getFacade().edit(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("TreatmentUpdated"));
+            this.persistTreatmentAttachedFile();
             return "/treatment/View?faces-redirect=true";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));

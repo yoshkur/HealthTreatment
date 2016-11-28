@@ -12,7 +12,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
@@ -80,8 +79,6 @@ public class Treatment implements Serializable {
     private Boolean attachedfile;
     @Size(max = 2147483647)
     private String attachedfilename;
-//    @Lob
-//    private byte[] attachedfiledata;
 
     public Treatment() {
     }
@@ -202,14 +199,6 @@ public class Treatment implements Serializable {
     public void setAttachedfilename(String attachedfilename) {
         this.attachedfilename = attachedfilename;
     }
-
-//    public byte[] getAttachedfiledata() {
-//        return attachedfiledata;
-//    }
-//
-//    public void setAttachedfiledata(byte[] attachedfiledata) {
-//        this.attachedfiledata = attachedfiledata;
-//    }
 
     @Override
     public int hashCode() {
