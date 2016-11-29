@@ -104,8 +104,10 @@ public class TreatmentController implements Serializable {
         } else {
             this.getSelected().setAttachedfile(Boolean.FALSE);
             this.getSelected().setAttachedfilename(null);
-            if (this.treatmentAttachedfileEjb.find(this.getSelected().getId()) != null) {
+            try {
+                this.treatmentAttachedfileEjb.find(this.getSelected().getId());
                 this.treatmentAttachedfileEjb.remove(this.getTreatmentAttachedFile());
+            } catch (Exception e) {
             }
         }
     }
@@ -141,11 +143,8 @@ public class TreatmentController implements Serializable {
             try {
                 this.treatmentAttachedFile = this.treatmentAttachedfileEjb.find(this.getSelected().getId());
             } catch (Exception e) {
-
+                this.treatmentAttachedFile = new Treatmentattachedfile();
             }
-        }
-        if (this.treatmentAttachedFile == null) {
-            this.treatmentAttachedFile = new Treatmentattachedfile();
         }
         return treatmentAttachedFile;
     }
